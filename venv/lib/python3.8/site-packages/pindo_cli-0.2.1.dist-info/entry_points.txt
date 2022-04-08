@@ -1,0 +1,3 @@
+[console_scripts]
+pindo=pindo_cli.cli:cli
+
