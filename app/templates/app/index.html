@@ -11,3 +11,8 @@
     <source src="{% static 'app/sample1.mp3' %}" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
+
+
+{% for language in languages %}
+    <p>{{language.lang_name}}</p>
+{% endfor %}
