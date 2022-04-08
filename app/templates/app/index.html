@@ -1,3 +1,13 @@
+{% load static %}
+
 <h1>
-    Hi {{name}}! Welcome to {{place}}
+    Hi {{name}}! Welcome to {{place}}      
 </h1>
+
+<br/>
+<h3>What to hear a story?</h3>
+<audio controls>
+    {% comment %} <source src="horse.ogg" type="audio/ogg"> {% endcomment %}
+    <source src="{% static 'app/sample1.mp3' %}" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
