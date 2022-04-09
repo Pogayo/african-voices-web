@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block content %}
-<header>
+<div class="content">
+    <header>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -16,52 +17,124 @@
 </header>
 
 
-<h1>
-    Hi {{name}}! Welcome to {{place}}
-</h1>
-
-
-<div style="float: left; width:63%">
+<div style="float: left; width:60%; padding: 15px">
     <p id="home-exp">
-    African Voices is  a  collaborative project that aims to collects high-quality speech (tts) datasets and synthesizers for all African languages.
-</p>
-<h3>Click to listen to the paragraph in Kenyan English?</h3>
-<audio controls>
-    {% comment %} <source src="horse.ogg" type="audio/ogg"> {% endcomment %}
-    <source src="{% static 'app/sample1.mp3' %}" type="audio/mpeg">
-    Your browser does not support the audio element.
-</audio>
+        African Voices is a collaborative project that aims to collects high-quality speech (tts) datasets and
+        synthesizers for all African languages.
+    </p>
+    <h3>Click to listen to the paragraph in Kenyan English</h3>
+    <audio controls>
+        {% comment %}
+        <source src="horse.ogg" type="audio/ogg">
+        {% endcomment %}
+        <source src="{% static 'app/sample1.mp3' %}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div id="home-stats">
+
+        <div class="col">
+            <div class="row">
+                <div id="num-langs" class="home-stats-item" style="color: #666666;">
+
+                <span id="num-langs-count" style="font-size:48px;">
+                    {{ num_langs}}
+                </span><br>
+
+                        languages
+
+                </div>
+                <div id="num-countries" class="home-stats-item" style="color:#FFAD00;">
+
+                <span id="num-countries-count" style="font-size:48px;">
+                    {{ num_countries }}
+                </span><br>
+                    countries
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div id="num-speakers" class="home-stats-item" style="color: #0023A3">
+
+                <span id="num-speakers-count" style="font-size:48px;">
+                    {{ num_speakers}}
+                </span><br>
+                    speakers
+
+                </div>
+                <div id="num-hours" class="home-stats-item"  style="color:  #12DC0C;">
+
+                <span id="num-hours-count" style="font-size:48px;">
+                    {{ num_hours }}
+                </span><br>
+                    hours
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    <div id="num-synthesizers" class="home-stats-item">
+
+                <span id="num-synthesizers-count" style="font-size:48px;">
+                    {{ num_synthesizers }}
+                </span><br>
+        synthesizers
+
+
+    </div>
+
+</div>
 
 </div>
 
 <figure id="map-wrapper">
-    <img src="{% static 'app/map.png' %}"  id="home-map"/>
+    <img src="{% static 'app/map.png' %}" id="home-map"/>
     <figcaption style="text-align: center">Geographical distribution of languages covered currently</figcaption>
 </figure>
 
 
 {% for language in languages %}
-    <p>{{language.lang_name}}</p>
+<p>{{language.lang_name}}</p>
 {% endfor %}
 
+</div>
 
 {% endblock %}
 
-<!--{% load static %}-->
 
-<!--<h1>-->
-<!--    Hi {{name}}! Welcome to {{place}}-->
-<!--</h1>-->
+{% block footer %}
+<footer>
+    <div class="row">
+        <div class="footer-logo" id="acknowledge-footer">
+            <h3> Acknowledgments</h3>
 
-<!--<br/>-->
-<!--<h3>What to hear a story?</h3>-->
-<!--<audio controls>-->
-<!--    {% comment %} <source src="horse.ogg" type="audio/ogg"> {% endcomment %}-->
-<!--    <source src="{% static 'app/sample1.mp3' %}" type="audio/mpeg">-->
-<!--    Your browser does not support the audio element.-->
-<!--</audio>-->
+            We appreciate Mozilla CommonVoice, CMU Wilderness ALLFA project, LLSTI and Open.Bible for their
+            work in creating speech datasets.
+            <!--                    <p>CMU Wilderness </p>-->
+            <!--                    <p>ALLFA project </p>-->
+            <!--                    <p>LLSTI</p>-->
+            <!--                    <p>Open.Bible </p>-->
 
-
-<!--{% for language in languages %}-->
-<!--    <p>{{language.lang_name}}</p>-->
-<!--{% endfor %}-->
+        </div>
+        <div class="footer-logo" id="contibute-footer">
+            <h3>Contribute!</h3>
+            You can contribute by recording, sharing datasets and building synthesizers.<br>
+            Make an issue or create a pull request on our GitHub page.
+        </div>
+        <div class="footer-logo" id="contact-footer">
+            <h3>Contact us</h3>
+            GitHub <br>
+            Email
+        </div>
+        <div class="footer-logo" id="pub-footer">
+            <h3>Publications</h3>
+            Building African Voices <br>
+        </div>
+    </div>
+</footer>
+{% endblock %}

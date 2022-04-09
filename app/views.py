@@ -5,7 +5,9 @@ from .models import Language
 from subprocess import call
 
 def index(request):
-    context = {'name': 'There', 'place':'Alice in wonderland', 'languages': Language.objects.all() }
+    
+    context = {'name': 'There', 'place':'Alice in wonderland', 'languages': Language.objects.all(),
+               'num_synthesizers':  20, "num_countries":  20, "num_langs":  11, "num_speakers":  14, "num_hours":  600 }
 
     try:
         execute_transcription()
