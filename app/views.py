@@ -17,6 +17,13 @@ def index(request):
     return render(request, 'app/index.html', context)
 
 
+def datasets(request):
+    return render(request, 'app/datasets.html')
+
+def synthesizers(request):
+    return render(request, 'app/synthesizers.html')
+
+
 def execute_transcription():
     print("Executing bash command")
     script = "/Users/nelsonbassey/Development/others/african_voices/transcribe.sh"

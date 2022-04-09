@@ -3,21 +3,9 @@
 
 {% block content %}
 <div class="content">
-    <header>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="logo" id="home-header">
-                    African Voices
-                </div>
-            </div>
-        </div>
-    </div>
-
-</header>
 
 
-<div style="float: left; width:60%; padding: 15px">
+<div style="float: left; width:60%; padding: 15px;  ">
     <p id="home-exp">
         African Voices is a collaborative project that aims to collects high-quality speech (tts) datasets and
         synthesizers for all African languages.
@@ -98,43 +86,8 @@
 </figure>
 
 
-{% for language in languages %}
-<p>{{language.lang_name}}</p>
-{% endfor %}
 
 </div>
 
 {% endblock %}
 
-
-{% block footer %}
-<footer>
-    <div class="row">
-        <div class="footer-logo" id="acknowledge-footer">
-            <h3> Acknowledgments</h3>
-
-            We appreciate Mozilla CommonVoice, CMU Wilderness ALLFA project, LLSTI and Open.Bible for their
-            work in creating speech datasets.
-            <!--                    <p>CMU Wilderness </p>-->
-            <!--                    <p>ALLFA project </p>-->
-            <!--                    <p>LLSTI</p>-->
-            <!--                    <p>Open.Bible </p>-->
-
-        </div>
-        <div class="footer-logo" id="contibute-footer">
-            <h3>Contribute!</h3>
-            You can contribute by recording, sharing datasets and building synthesizers.<br>
-            Make an issue or create a pull request on our GitHub page.
-        </div>
-        <div class="footer-logo" id="contact-footer">
-            <h3>Contact us</h3>
-            GitHub <br>
-            Email
-        </div>
-        <div class="footer-logo" id="pub-footer">
-            <h3>Publications</h3>
-            Building African Voices <br>
-        </div>
-    </div>
-</footer>
-{% endblock %}
