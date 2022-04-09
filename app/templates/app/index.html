@@ -1,18 +1,67 @@
+{% extends "app/base_generic.html" %}
 {% load static %}
 
+{% block content %}
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="logo" id="home-header">
+                    African Voices
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+
 <h1>
-    Hi {{name}}! Welcome to {{place}}      
+    Hi {{name}}! Welcome to {{place}}
 </h1>
 
-<br/>
-<h3>What to hear a story?</h3>
+
+<div style="float: left; width:63%">
+    <p id="home-exp">
+    African Voices is  a  collaborative project that aims to collects high-quality speech (tts) datasets and synthesizers for all African languages.
+</p>
+<h3>Click to listen to the paragraph in Kenyan English?</h3>
 <audio controls>
     {% comment %} <source src="horse.ogg" type="audio/ogg"> {% endcomment %}
     <source src="{% static 'app/sample1.mp3' %}" type="audio/mpeg">
     Your browser does not support the audio element.
 </audio>
 
+</div>
+
+<figure id="map-wrapper">
+    <img src="{% static 'app/map.png' %}"  id="home-map"/>
+    <figcaption style="text-align: center">Geographical distribution of languages covered currently</figcaption>
+</figure>
+
 
 {% for language in languages %}
     <p>{{language.lang_name}}</p>
 {% endfor %}
+
+
+{% endblock %}
+
+<!--{% load static %}-->
+
+<!--<h1>-->
+<!--    Hi {{name}}! Welcome to {{place}}-->
+<!--</h1>-->
+
+<!--<br/>-->
+<!--<h3>What to hear a story?</h3>-->
+<!--<audio controls>-->
+<!--    {% comment %} <source src="horse.ogg" type="audio/ogg"> {% endcomment %}-->
+<!--    <source src="{% static 'app/sample1.mp3' %}" type="audio/mpeg">-->
+<!--    Your browser does not support the audio element.-->
+<!--</audio>-->
+
+
+<!--{% for language in languages %}-->
+<!--    <p>{{language.lang_name}}</p>-->
+<!--{% endfor %}-->

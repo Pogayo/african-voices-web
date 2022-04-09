@@ -1,0 +1,42 @@
+
+#home-header {
+    /*position: absolute;*/
+    /*width: 599px;*/
+    /*height: 141px;*/
+    /*left: 32px;*/
+    /*top: 55px;*/
+
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 65px;
+
+    color: #BB0000;
+
+}
+#home-map{
+    width:300px;
+    max-width: 100%;
+    height: auto;
+
+
+}
+
+#map-wrapper{
+float:right;
+    width:30%
+    /*margin-left:20px*/
+
+}
+#home-exp{
+
+
+font-family: 'Open Sans';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 33px;
+
+color: #000000;
+}
