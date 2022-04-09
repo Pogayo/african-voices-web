@@ -1,39 +1,27 @@
 
-#home-header {
-    /*position: absolute;*/
-    /*width: 599px;*/
-    /*height: 141px;*/
-    /*left: 32px;*/
-    /*top: 55px;*/
+#home-logotext {
 
     font-style: normal;
     font-weight: 600;
     font-size: 48px;
     line-height: 65px;
     padding: 15px;
-
     color: #BB0000;
-
 }
 
 #home-map {
     width: 300px;
     max-width: 100%;
     height: auto;
-
-
 }
 
 #map-wrapper {
     float: right;
     width: 30%
-    /*margin-left:20px*/
 
 }
 
 #home-exp {
-
-    font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
@@ -50,9 +38,29 @@
 
 }
 
-.col-md-12 {
-    padding-left: 0px;
-    padding-right: 0px;
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    margin-left:20px
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5em;
+}
+
+.nav > * {
+    margin: 20px
+}
+
+.nav > a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.nav > a:hover {
+    color: #BB0000;
 }
 
 footer {
@@ -61,7 +69,7 @@ footer {
     color: white;
     display: flex;
     flex-flow: row wrap;
-    flex:1;
+    flex: 1;
 
 }
 
@@ -83,10 +91,9 @@ body {
     font-family: 'Open Sans';
     box-sizing: content-box;
     min-height: 100%;
-
-
 }
-#home-stats{
+
+#home-stats {
     display: grid;
     /*flex-direction: row;*/
     /*flex-flow: row wrap;*/
@@ -99,14 +106,46 @@ body {
     text-align: center;
 }
 
-.home-stats-item{
+.home-stats-item {
     padding: 10px 5px;
     dislay: flex;
     flex: 1;
     min-width: 0;
-    font-size:30px
+    font-size: 30px
 
 }
+
 .content {
-  min-height: calc(100vh - 70px);
+    min-height: calc(100vh - 70px);
+    margin-left:20px
+}
+
+
+#myUL {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: fixed; /* instead of : position:absolute;*/
+    top: 7%; /* instead of : top:100%;*/
+    background-color: white;
+    /*border: 1px solid black;*/
+    z-index: 50;
+}
+
+#myUL li a {
+    margin-top: -1px; /* Prevent double borders */
+    padding: 10px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    display: block;}
+
+
+#myUL li a:hover:not(.header) {
+    background-color:#FFAD00;
+    color: white;
+}
+
+input {
+    padding: 5px 5px;
 }
