@@ -4,6 +4,7 @@
 avoice/
 # Vagrant
 .vagrant/
+db.sqlite3
 
 # Mac/OSX
 .DS_Store
