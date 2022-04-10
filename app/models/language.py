@@ -5,12 +5,11 @@ from .country import Country
 
 class Language(models.Model):
     uuid = models.CharField(primary_key=True, unique=True, default=uuid4, max_length=100)
-    lang_id = models.CharField(max_length=100)
     lang_code_639_2 = models.CharField(max_length=100)
     lang_code_639_1 = models.CharField(max_length=100)
     lang_name = models.CharField(max_length=100)
-    lang_native_speakers = models.IntegerField(max_length=100)
-    lang_non_native_speakers = models.IntegerField(max_length=100)
+    lang_native_speakers = models.IntegerField(default=0)
+    lang_non_native_speakers = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -20,8 +19,8 @@ class Language(models.Model):
 
 class LanguageCountry(models.Model):
     uuid = models.CharField(primary_key=True, unique=True, default=uuid4, max_length=100)
-    language = models.ForeignKey(Language, on_delete=models.DO_NOTHING)
-    country = models.ForeignKey(Country, on_delete=models.DO_NOTHING)
+    language = models.ManyToManyField(Language)
+    country = models.ManyToManyField(Country)
 
 
 class LanguageSample(models.Model):
@@ -34,4 +33,4 @@ class LanguageSample(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return "lang: " + self.language + ": text: " + self.text
+        return "lang: " + str(self.language) + ": text: " + self.text
