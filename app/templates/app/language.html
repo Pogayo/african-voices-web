@@ -1,2 +1,42 @@
 {% extends "app/base_generic.html" %}
 {% block title %} <title>{{ language.lang_name }}</title> {% endblock %} # get me language
+{% block content %}
+
+    <h1> Language: {{ language.lang_name }}</h1>
+    <ul>
+        <li>ISO 693-2 Code: {{ language.lang_code_639_2 }}</li>
+        <li>Language family: Germanic</li>
+        <li> Number of speakers: {{ language.total_speakers }}</li>
+        <li>Countries : {{ language.all_countries }}</li>
+    </ul>
+
+    <h2 class="language-h2">Datasets</h2>
+
+    <table>
+        <tr>
+            <th> Data_id</th>
+            <th> Source</th>
+            <th> #utt</th>
+            <th> MCD</th>
+            <th> Hrs</th>
+            <th> Gender</th>
+            <th> Download</th>
+        </tr>
+        {% for dataset in language.datasets %}
+            <tr>
+                <td>{{ dataset.data_id }}</td>
+                <td>{{ dataset.source }}</td>
+                <td>{{ dataset.pass1_utt }}</td>
+                <td>{{ dataset.pass1_mcd }}</td>
+                <td>{{ dataset.duration }}</td>
+                {#               TODO: put the right one      <td>{{ Male }}</td> #}
+                <td> Female</td>
+                {% if not dataset.data_location %}
+                    <td> Unavailable</td>
+                {% else %}
+                    <td><a href="#">Available</a></td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
