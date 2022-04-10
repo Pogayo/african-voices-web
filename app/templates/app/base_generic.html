@@ -26,7 +26,7 @@
                         <ul id="myUL">
 
                             {% for language in languages %}
-                            <li style="display:none"><a href="#"> {{language.lang_name}} </a></li>
+                            <li style="display:none"><a href="{% url 'language' language.lang_code_639_2 %}"> {{language.lang_name}} </a></li>
                             {% endfor %}
                         </ul>
 
@@ -36,9 +36,9 @@
             <a href="{% url 'datasets' %}" class="nav-link">
                 Datasets
             </a>
-            <a href="{% url 'synthesizers' %}" class="nav-link">
-                Synthesizers
-            </a>
+{#            <a href="{% url 'synthesizers' %}" class="nav-link">#}
+{#                Synthesizers#}
+{#            </a>#}
         </div>
     </div>
 
