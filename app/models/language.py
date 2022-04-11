@@ -30,11 +30,17 @@ class Language(models.Model):
     @property
     def datasets(self):
         return self.dataset_set.all()
+    @property
+    def synthesizers(self):
+        return self.synthesizer_set.all()
+    @property
+    def samples(self):
+        return self.language_sample_set.all()
 
 
 class LanguageSample(models.Model):
     uuid = models.CharField(primary_key=True, unique=True, default=uuid4, max_length=100)
-    language = models.ForeignKey(Language, on_delete=models.DO_NOTHING)
+    language = models.ForeignKey(Language, on_delete=models.DO_NOTHING, related_name="language_sample_set")
     sample_id = models.CharField(max_length=100)
     text = models.CharField(max_length=100)
     pronunciation = models.CharField(max_length=100)
@@ -43,3 +49,7 @@ class LanguageSample(models.Model):
 
     def __str__(self) -> str:
         return "lang: " + str(self.language) + ": text: " + self.text
+
+    @property
+    def synthesizer_samples(self):
+        return self.synthesizer_samples_set.all()
