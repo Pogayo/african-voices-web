@@ -1,9 +1,12 @@
 #!/usr/bin/python
-
-from subprocess import call
+import time
+from subprocess import check_call
+from uuid import uuid4
 
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
 
+from .forms import SynthesizeForm
 from .models import Language
 
 
@@ -22,13 +25,33 @@ def index(request):
 def datasets(request):
     return render(request, 'app/datasets.html')
 
-def execute_transcription():
+
+def execute_transcription(context):
     print("Executing bash command")
-    script = "/Users/nelsonbassey/Development/others/african_voices/transcribe.sh"
-    res = call(script, shell=True)
+    script = "./transcribe.sh"
+    res = check_call([script, "-v", context['synth_id'], "-i", context['text'], "-o", context['output_file']])
     print(res)
 
 
 def language(request, lang_code_639_2):
-    context = {'language': Language.objects.get(lang_code_639_2=lang_code_639_2)}
+    language = Language.objects.get(lang_code_639_2=lang_code_639_2)
+    synthesizer_ids = [(synth.flite_location, synth.synth_id) for synth in language.synthesizer_set.all()]
+    context = {'language': language, 'form': SynthesizeForm(synthesizer_ids)}
     return render(request, 'app/language.html', context)
+
+
+@csrf_exempt
+def synthesize(request):
+    context = {}
+    if request.method == 'POST':
+        context['synth_id'] = request.POST.get('synth_id')
+        context['text'] = request.POST.get("text")
+        context['audio_format'] = request.POST.get("audio_format")
+        context['output_file'] = "app/static/app/synthesized/" + uuid4().hex + "." + "wav"
+        execute_transcription(context)
+        time.sleep(3)
+        # TODO: convert the wav file to mp3
+        # TODO: write a job to delete the wav files after a while
+        context['output_file'] = context['output_file'][4:]
+
+    return render(request, 'app/synthesize.html', context)

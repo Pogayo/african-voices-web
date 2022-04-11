@@ -2,9 +2,11 @@
 .vscode/
 .idea/*
 avoice/
+app/static/app/synthesized
 # Vagrant
 .vagrant/
 db.sqlite3
+file
 
 # Mac/OSX
 .DS_Store

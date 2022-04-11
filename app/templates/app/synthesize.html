@@ -1,0 +1,10 @@
+{% extends "app/base_generic.html" %}
+{% block title %}Datasets{% endblock %}
+
+{% block content %}
+
+      <audio controls>
+        <source src="/{{ output_file }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+{% endblock %}
