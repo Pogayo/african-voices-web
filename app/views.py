@@ -1,6 +1,5 @@
 #!/usr/bin/python
-import time
-from subprocess import check_call
+from subprocess import Popen, TimeoutExpired
 from uuid import uuid4
 
 from django.shortcuts import render
@@ -14,10 +13,6 @@ def index(request):
     context = {'name': 'There', 'place': 'Alice in wonderland', 'languages': Language.objects.all(),
                'num_synthesizers': 20, "num_countries": 20, "num_langs": 11, "num_speakers": 14, "num_hours": 600}
 
-    try:
-        execute_transcription()
-    except BaseException as e:
-        print(e)
 
     return render(request, 'app/index.html', context)
 
@@ -29,8 +24,12 @@ def datasets(request):
 def execute_transcription(context):
     print("Executing bash command")
     script = "./transcribe.sh"
-    res = check_call([script, "-v", context['synth_id'], "-i", context['text'], "-o", context['output_file']])
-    print(res)
+    proc = Popen([script, "-v", context['synth_id'], "-i", context['text'], "-o", context['output_file']])
+    try:
+        outs, errs = proc.communicate(timeout=15)
+    except TimeoutExpired:
+        proc.kill()
+        outs, errs = proc.communicate()
 
 
 def language(request, lang_code_639_2):
@@ -49,7 +48,9 @@ def synthesize(request):
         context['audio_format'] = request.POST.get("audio_format")
         context['output_file'] = "app/static/app/synthesized/" + uuid4().hex + "." + "wav"
         execute_transcription(context)
-        time.sleep(3)
+
+
+        # time.sleep(3)
         # TODO: convert the wav file to mp3
         # TODO: write a job to delete the wav files after a while
         context['output_file'] = context['output_file'][4:]
