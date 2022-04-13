@@ -8,7 +8,6 @@ from django.views.decorators.csrf import csrf_exempt
 from .forms import SynthesizeForm
 from .models import Language
 
-
 def index(request):
     context = {'name': 'There', 'place': 'Alice in wonderland', 'languages': Language.objects.all(),
                'num_synthesizers': 20, "num_countries": 20, "num_langs": 11, "num_speakers": 14, "num_hours": 600}
@@ -24,7 +23,7 @@ def datasets(request):
 def execute_transcription(context):
     print("Executing bash command")
     script = "./transcribe.sh"
-    proc = Popen([script, "-v", context['synth_id'], "-i", context['text'], "-o", context['output_file']])
+    proc = Popen([script, "-v", context['synth_id'], "-i", context['text'], "-o", context['output_file'], "-f", context['audio_format']])
     try:
         outs, errs = proc.communicate(timeout=15)
     except TimeoutExpired:
@@ -46,13 +45,13 @@ def synthesize(request):
         context['synth_id'] = request.POST.get('synth_id')
         context['text'] = request.POST.get("text")
         context['audio_format'] = request.POST.get("audio_format")
-        context['output_file'] = "app/static/app/synthesized/" + uuid4().hex + "." + "wav"
+        context['output_file'] = "app/static/app/synthesized/" + uuid4().hex
         execute_transcription(context)
 
 
         # time.sleep(3)
         # TODO: convert the wav file to mp3
         # TODO: write a job to delete the wav files after a while
-        context['output_file'] = context['output_file'][4:]
+        context['output_file'] = context['output_file'][4:]+"." + context['audio_format']
 
     return render(request, 'app/synthesize.html', context)

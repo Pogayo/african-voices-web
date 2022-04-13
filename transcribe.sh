@@ -8,12 +8,13 @@ export FESTVOXDIR=/Users/ogayo/dev/build/festvox
 export SPTKDIR=/Users/ogayo/dev/build/SPTK
 
 
-while getopts v:i:o: flag
+while getopts v:i:o:f: flag
 do
     case "${flag}" in
         v) voice=${OPTARG};;
         i) input=${OPTARG};;
         o) output=${OPTARG};;
+        f) format=${OPTARG};;
     esac
 done
 echo "voice: $voice";
@@ -21,4 +22,11 @@ echo "input: $input";
 echo "output: $output";
 
 echo $input > file
-  $FLITEDIR/bin/flite  -voice $voice  file  $output
+$FLITEDIR/bin/flite  -voice $voice  file  $output.wav
+
+#convert to audio format
+if [ $format == "mp3" ]; then
+    echo "Converting to wav"
+    lame $output.wav $output.mp3
+    rm $output.wav
+fi
