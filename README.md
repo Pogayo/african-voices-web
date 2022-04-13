@@ -8,3 +8,7 @@
   * Run make migrations and then migrate. `python manage.py makemigrations` and then `python manage.py migrate` to create the tables from models in the database
   * Run `python manage.py runserver` on the project root folder to run project on local machine
   
+# System Requirements
+For the project to work, you need to have the following installed:
+* [Festvox](https://github.com/festvox/festvox#installation) and its dependencies
+* Lame
