@@ -20,9 +20,8 @@ def datasets(request):
     return render(request, 'app/datasets.html')
 
 
-def execute_transcription(context):
-    print("Executing bash command")
-    script = "./transcribe.sh"
+def execute_synthesis(context):
+    script = "./synthesize.sh"
     proc = Popen([script, "-v", context['synth_id'], "-i", context['text'], "-o", context['output_file'], "-f", context['audio_format']])
     try:
         outs, errs = proc.communicate(timeout=15)
@@ -41,17 +40,28 @@ def language(request, lang_code_639_2):
 @csrf_exempt
 def synthesize(request):
     context = {}
-    if request.method == 'POST':
-        context['synth_id'] = request.POST.get('synth_id')
-        context['text'] = request.POST.get("text")
-        context['audio_format'] = request.POST.get("audio_format")
-        context['output_file'] = "app/static/app/synthesized/" + uuid4().hex
-        execute_transcription(context)
+    form = SynthesizeForm(request.POST or None)
+    print(request.POST)
+    if request.method == 'POST' and form.is_valid() :
+        new_request = form.save()
+        context['synth_id'] = new_request.synth_id
+        context['text'] = new_request.text
+        context['output_file'] =  "app/static/app/synthesized/" + uuid4().hex
+        context['audio_format'] = new_request.audio_format
+
+        # context['synth_id'] = request.POST.get('synth_id')
+        # context['text'] = request.POST.get("text")
+        # print("hehheheh", context['text'])
+        # context['audio_format'] = request.POST.get("audio_format")
+        # context['output_file'] = "app/static/app/synthesized/" + uuid4().hex
+        execute_synthesis(context)
 
 
         # time.sleep(3)
-        # TODO: convert the wav file to mp3
         # TODO: write a job to delete the wav files after a while
         context['output_file'] = context['output_file'][4:]+"." + context['audio_format']
+    else:
+        print("form is not valid")
+        print(form.errors)
 
     return render(request, 'app/synthesize.html', context)
