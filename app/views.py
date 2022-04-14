@@ -1,4 +1,5 @@
 #!/usr/bin/python
+from pprint import pprint
 from subprocess import Popen, TimeoutExpired
 from uuid import uuid4
 
@@ -6,7 +7,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import SynthesizeForm
-from .models import Language
+from .models import Language, SynthesizeRequestModel
 
 def index(request):
     context = {'name': 'There', 'place': 'Alice in wonderland', 'languages': Language.objects.all(),
@@ -40,28 +41,21 @@ def language(request, lang_code_639_2):
 @csrf_exempt
 def synthesize(request):
     context = {}
-    form = SynthesizeForm(request.POST or None)
-    print(request.POST)
-    if request.method == 'POST' and form.is_valid() :
-        new_request = form.save()
-        context['synth_id'] = new_request.synth_id
-        context['text'] = new_request.text
-        context['output_file'] =  "app/static/app/synthesized/" + uuid4().hex
-        context['audio_format'] = new_request.audio_format
-
-        # context['synth_id'] = request.POST.get('synth_id')
-        # context['text'] = request.POST.get("text")
-        # print("hehheheh", context['text'])
-        # context['audio_format'] = request.POST.get("audio_format")
-        # context['output_file'] = "app/static/app/synthesized/" + uuid4().hex
+    
+    if request.method == 'POST':
+        context['synth_id'] = request.POST.get('synth_id')
+        context['text'] = request.POST.get("text")
+        context['audio_format'] = request.POST.get("audio_format")
+        
+        SynthesizeRequestModel.objects.create(**context)
+        
+        context['output_file'] = "app/static/app/synthesized/" + uuid4().hex
         execute_synthesis(context)
-
 
         # time.sleep(3)
         # TODO: write a job to delete the wav files after a while
         context['output_file'] = context['output_file'][4:]+"." + context['audio_format']
     else:
-        print("form is not valid")
-        print(form.errors)
-
+        print("GET here")
+    
     return render(request, 'app/synthesize.html', context)
