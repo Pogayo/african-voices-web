@@ -47,6 +47,11 @@ def synthesize(request):
         context['text'] = request.POST.get("text")
         context['audio_format'] = request.POST.get("audio_format")
         
+        field_is_empty = is_empty(context['audio_format']) or is_empty(context['text']) or is_empty(context['synth_id'])
+
+        if field_is_empty:
+            return render(request, 'app/synthesize.html', {**context, "errors": "Fields are empty"})
+            
         SynthesizeRequestModel.objects.create(**context)
         
         context['output_file'] = "app/static/app/synthesized/" + uuid4().hex
@@ -59,3 +64,6 @@ def synthesize(request):
         print("GET here")
     
     return render(request, 'app/synthesize.html', context)
+
+def is_empty(s):
+    return not s

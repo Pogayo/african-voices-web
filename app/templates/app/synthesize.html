@@ -3,6 +3,10 @@
 
 {% block content %}
 
+      {% if errors %}
+        <p>{{ errors }}</p>
+      {% endif %}
+
       <audio controls>
         <source src="/{{ output_file }}" type="audio/mpeg">
         Your browser does not support the audio element.
