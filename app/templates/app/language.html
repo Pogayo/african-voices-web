@@ -1,4 +1,5 @@
 {% extends "app/base_generic.html" %}
+{% load static %}
 {% block title %} <title>{{ language.lang_name }}</title> {% endblock %} # get me language
 {% block content %}
 
@@ -98,8 +99,17 @@
         <h2 class="language-h2"> Synthesize your text!</h2>
         <form action="{% url 'synthesize' %}" method="POST">
             {{ form.as_p }}
-            <button id="synthesize">Synthesize</button>
+            <button id="synthesize" onclick="waitingSynthResponse('wait_modal')">Synthesize</button>
+
         </form>
+    </div>
+
+    <div id="wait_modal">
+        <div id="wait_modal_content">
+            <p>Please wait while we synthesize your text</p>
+            <img src="{% static 'app/loader.gif' %}" alt="Loading...">
+        </div>
+
     </div>
 
 

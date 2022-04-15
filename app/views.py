@@ -1,5 +1,9 @@
 #!/usr/bin/python
 from pprint import pprint
+from threading import Thread
+import os
+from time import sleep
+
 from subprocess import Popen, TimeoutExpired
 from uuid import uuid4
 
@@ -8,6 +12,10 @@ from django.views.decorators.csrf import csrf_exempt
 
 from .forms import SynthesizeForm
 from .models import Language, SynthesizeRequestModel
+
+def delete_audio(audio_path):
+    sleep(10)
+    os.remove(audio_path)
 
 def index(request):
     context = {'name': 'There', 'place': 'Alice in wonderland', 'languages': Language.objects.all(),
@@ -60,6 +68,10 @@ def synthesize(request):
         # time.sleep(3)
         # TODO: write a job to delete the wav files after a while
         context['output_file'] = context['output_file'][4:]+"." + context['audio_format']
+        #delete the file
+        new_thread = Thread(target=delete_audio, args=("app/"+context['output_file'],))
+        new_thread.start()
+
     else:
         print("GET here")
     
@@ -67,3 +79,5 @@ def synthesize(request):
 
 def is_empty(s):
     return not s
+
+
