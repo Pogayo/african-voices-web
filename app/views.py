@@ -79,5 +79,10 @@ def synthesize(request):
     return render(request, 'app/synthesize.html', context)
 
 
+def flite(request):
+    context = {'languages': Language.objects.all(), }
+    return render(request, 'app/flite.html', context)
+
+
 def is_empty(s):
     return not s
