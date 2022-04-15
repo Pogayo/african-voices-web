@@ -11,7 +11,7 @@
         <li>Countries : {{ language.all_countries }}</li>
     </ul>
 
-    <h2 class="language-h2">Datasets</h2>
+    <h2 class="h2-primary">Datasets</h2>
 
     <table>
         <tr>
@@ -41,7 +41,7 @@
         {% endfor %}
     </table>
 
-    <h2 class="language-h2">Synthesizers</h2>
+    <h2 class="h2-primary">Synthesizers</h2>
 
     <table>
         <tr>
@@ -77,7 +77,7 @@
         {% endfor %}
     </table>
 
-    <h2 class="language-h2"> Listen to samples </h2>
+    <h2 class="h2-primary"> Listen to samples </h2>
 
     {% for sample in language.samples %}
 
@@ -96,7 +96,7 @@
         </div>
     {% endfor %}
     <div>
-        <h2 class="language-h2"> Synthesize your text!</h2>
+        <h2 class="h2-primary"> Synthesize your text!</h2>
         <form action="{% url 'synthesize' %}" method="POST">
             {{ form.as_p }}
             <button id="synthesize" onclick="waitingSynthResponse('wait_modal')">Synthesize</button>

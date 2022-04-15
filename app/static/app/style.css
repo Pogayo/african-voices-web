@@ -7,6 +7,7 @@
     line-height: 65px;
     padding: 15px;
     color: #BB0000;
+    text-decoration: none;
 }
 
 #home-map {
@@ -77,6 +78,10 @@ footer {
     flex: 1;
 
 }
+.footer_link{
+        color: white;
+        text-decoration: none;
+}
 
 
 .footer-logo {
@@ -96,6 +101,7 @@ body {
     font-family: 'Open Sans';
     box-sizing: content-box;
     min-height: 100%;
+    font-size: 20px;
 }
 
 #home-stats {
@@ -159,13 +165,13 @@ input {
 }
 
 
-.language-h2{
+.h2-primary{
     font-family: 'Open Sans', serif;
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 33px;
-    color: #FFAD00
+    color: #FFAD00;
 }
 #wait_modal{
     display: none;
@@ -184,4 +190,9 @@ input {
     transform: translate(-50%, -50%);
     background-color: white;
     padding: 20px;
+}
+
+#flite-page-content{
+    padding: 20px 40px;
+    font-size: 1.25em;
 }
