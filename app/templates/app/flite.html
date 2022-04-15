@@ -2,5 +2,37 @@
 {% load static %}
 {% block title %}<title>Flite</title>{% endblock %}
 {% block content %}
-    <p>This is where we explain how to install the synthesizers on an android phone.</p>
+    <p> You might want to use the voices on your phone in the apps or browser. With <a href="#">flite</a> a TTS engine
+        built at CMU, this is possible.</p>
+
+    <h2> Android </h2>
+    <h2> iOS</h2>
+    We do not have an iOS version of flite yet. It is coming soon.
+    <h2> Desktop OS</h2>
+    Flite works on Linux, Windows and Mac OS X. Follow the steps below to install it.
+    <ol>
+        <li> Download and set up Festvox; Flite is one of the packages</li>
+        <li> Download the voices of your choice or you can also download and use the voices on the fly.
+            <br>
+            Downloading on the fly
+            <pre><code> ./bin/flite -voice http://festvox.org/flite/packed/flite-2.1/voices/cmu_us_aew.flitevox -f doc/alice
+      </code></pre>
+            Using a local flite voice
+            <pre><code>./bin/flite -voice voices/cmu_us_ahw.flitevox -f doc/alice </code></pre>
+        </li>
+    </ol>
+
+
+    <h2> Flite for developers</h2>
+    {#    TODO: Update this#}
+    Android developers: If you are developing an application and would like to use Flite for speech synthesis, you can
+    specify "edu.cmu.cs.speech.tts.flite" as the package name of the engine to use.
+    <p>
+
+    </p>
+
+
+
+
+
 {% endblock %}
