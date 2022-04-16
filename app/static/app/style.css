@@ -1,8 +1,11 @@
-html, body { height: 100%;}
+html, body {
+    height: 100%;
+}
 
 body > footer {
-  position: sticky;
-  top: 100vh;
+    position: sticky;
+    position: -webkit-sticky; /* Safari */
+    top: 100vh;
 }
 
 #home-logotext {
@@ -33,7 +36,7 @@ body > footer {
 }
 
 .row {
-    flex-flow: row ;
+    flex-flow: row;
     display: flex;
     flex-wrap: wrap;
     flex: 1;
@@ -42,14 +45,15 @@ body > footer {
 }
 
 
-header{
-    border-bottom:  0.2px solid rgba(136, 136, 136, 0.27);
+header {
+    border-bottom: 0.2px solid rgba(136, 136, 136, 0.27);
 
 }
+
 .site-header {
     display: flex;
     justify-content: space-between;
-    margin-left:20px
+    margin-left: 20px
 }
 
 .nav {
@@ -84,9 +88,10 @@ footer {
     padding: 10px 35px;
 
 }
-.footer_link{
-        color: white;
-        text-decoration: none;
+
+.footer_link {
+    color: white;
+    text-decoration: none;
 }
 
 
@@ -119,7 +124,7 @@ body {
     text-align: center;
 }
 
-#home-stats > .col{
+#home-stats > .col {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -131,21 +136,21 @@ body {
     font-size: 1.5em;
 }
 
-.home-stats-item span{
+.home-stats-item span {
     font-size: 2.7em;
 }
 
-.home-container{
+.home-container {
     display: grid;
     grid-template-columns: 8fr 4fr;
 }
 
-.home-container > img{
+.home-container > img {
     width: 400px;
 }
 
-@media only screen and (max-width:970px) {
-    .home-container{
+@media only screen and (max-width: 970px) {
+    .home-container {
         grid-template-columns: 1fr;
     }
 
@@ -154,34 +159,35 @@ body {
     }
 }
 
-@media only screen and (min-width:800px) and (max-width:970px) {
+@media only screen and (min-width: 800px) and (max-width: 970px) {
 
     footer {
         grid-template-columns: 1fr 1fr
     }
 }
 
-@media only screen and (max-width:800px) {
+@media only screen and (max-width: 800px) {
     footer {
         grid-template-columns: 1fr
     }
 }
+
 #searchUL {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    position: fixed;
-    top: 7%; 
+    position: absolute;
+    /*top: 7%;*/
     background-color: white;
     z-index: 50;
-      box-shadow: 0px 2px 10px 2px rgba(136, 136, 136, 0.72);
+    box-shadow: 0px 2px 10px 2px rgba(136, 136, 136, 0.72);
     border-radius: 5px;
     width: 25%;
 
 }
 
 #searchUL li a {
-    margin-top: -1px; 
+    margin-top: -1px;
     padding: 10px;
     text-decoration: none;
     font-size: 18px;
@@ -192,11 +198,11 @@ body {
 
 
 #searchUL li a:hover:not(.header) {
-    background-color:#FFAD00;
+    background-color: #FFAD00;
     color: white;
 }
 
-.h2-primary{
+.h2-primary {
     font-family: 'Open Sans', serif;
     font-style: normal;
     font-weight: 700;
@@ -204,7 +210,8 @@ body {
     line-height: 33px;
     color: #FFAD00;
 }
-#wait_modal{
+
+#wait_modal {
     display: none;
     position: fixed;
     z-index: 100;
@@ -212,9 +219,10 @@ body {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
 }
-#wait_modal_content{
+
+#wait_modal_content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -223,39 +231,51 @@ body {
     padding: 20px;
 }
 
-.page-content{
+.page-content {
     /*padding: 10px 40px;*/
     /*font-size: 18px;*/
 }
 
 
-#side-nav-div{
+#side-nav-div {
     margin-left: auto;
-    margin-top:1em;
+    margin-top: 1em;
 }
 
-.side-nav > ul{
+.side-nav > ul {
     list-style: none;
     background-color: rgba(0, 0, 0, 0.05);
 
 }
-.side-nav > ul >li>a{
-    text-decoration:none;
+
+.side-nav > ul > li > a {
+    text-decoration: none;
     color: #000000;
 
 }
-.side-nav > ul >li{
-    border-bottom: 1px solid #dee2e6 ;
-    padding:5px 0px
+
+.side-nav > ul > li {
+    border-bottom: 1px solid #dee2e6;
+    padding: 5px 0px
 }
-.flex-column{
+
+.flex-column {
     display: flex;
     flex-direction: column;
     flex-flow: column nowrap;
 }
 
 
-.main-content{
+.main-content {
     margin-top: 2em;
 }
 
+pre{
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1.2em;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 33px;
+    color: #000000;
