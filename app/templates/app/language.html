@@ -2,115 +2,124 @@
 {% load static %}
 {% block title %} <title>{{ language.lang_name }}</title> {% endblock %} # get me language
 {% block content %}
+    <div id="page-content">
+        <h1 style="margin-top: -10px"> Language: {{ language.lang_name }}</h1>
 
-    <h1> Language: {{ language.lang_name }}</h1>
-    <ul>
-        <li>ISO 693-2 Code: {{ language.lang_code_639_2 }}</li>
-        <li>Language family: Germanic</li>
-        <li> Number of speakers: {{ language.total_speakers }}</li>
-        <li>Countries : {{ language.all_countries }}</li>
-    </ul>
+        <div class="row" style="margin-top: -30px">
+            <ul>
+                <li>ISO 693-2 Code: {{ language.lang_code_639_2 }}</li>
+                <li>Language family: Germanic</li>
+                <li> Number of speakers: {{ language.total_speakers }}</li>
+                <li>Countries : {{ language.all_countries }}</li>
+            </ul>
 
-    <h2 class="h2-primary">Datasets</h2>
+            <a href="#synthesize-div" class="side-nav" id="synth-side-btn">
+                <button> Synthesize Luo text</button>
+            </a>
 
-    <table>
-        <tr>
-            <th> Data_id</th>
-            <th> Source</th>
-            <th> #utt</th>
-            <th> MCD</th>
-            <th> Hrs</th>
-            <th> Gender</th>
-            <th> Download</th>
-        </tr>
-        {% for dataset in language.datasets %}
+        </div>
+
+        <h2 class="h2-primary">Datasets</h2>
+
+        <table>
             <tr>
-                <td>{{ dataset.data_id }}</td>
-                <td>{{ dataset.source }}</td>
-                <td>{{ dataset.pass1_utt }}</td>
-                <td>{{ dataset.pass1_mcd }}</td>
-                <td>{{ dataset.duration }}</td>
-                {#               TODO: put the right one      <td>{{ Male }}</td> #}
-                <td> Female</td>
-                {% if not dataset.data_location %}
-                    <td> Unavailable</td>
-                {% else %}
-                    <td><a href="#">Available</a></td>
-                {% endif %}
+                <th> Data_id</th>
+                <th> Source</th>
+                <th> #utt</th>
+                <th> MCD</th>
+                <th> Hrs</th>
+                <th> Gender</th>
+                <th> Download</th>
             </tr>
-        {% endfor %}
-    </table>
-
-    <h2 class="h2-primary">Synthesizers</h2>
-
-    <table>
-        <tr>
-            <th> synth_id</th>
-            <th> data_id</th>
-            <th> #utt</th>
-            <th> Hrs</th>
-            <th> MCD base</th>
-            <th> MCD rfs</th>
-            <th> Data</th>
-            <th> Flite</th>
-
-        </tr>
-        {% for synthesizer in language.synthesizers %}
-            <tr>
-                <td>{{ synthesizer.synth_id }}</td>
-                <td>{{ synthesizer.dataset.data_id }}</td>
-                <td>{{ synthesizer.rfs_utt }}</td>
-                <td>{{ synthesizer.rfs_hrs }}</td>
-                <td>{{ synthesizer.mcd_base }}</td>
-                <td>{{ synthesizer.mcd_rfs }}</td>
-                {% if not synthesizer.data_location %}
-                    <td> Unavailable</td>
-                {% else %}
-                    <td><a href="#"> Download</a></td>
-                {% endif %}
-                {% if not synthesizer.flite_location %}
-                    <td> Unavailable</td>
-                {% else %}
-                    <td><a href="#"> Download </a></td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-    </table>
-
-    <h2 class="h2-primary"> Listen to samples </h2>
-
-    {% for sample in language.samples %}
-
-        <div>
-            <p> Text: {{ sample.text }}</p>
-            <p> Pronunciation: {{ sample.pronunciation }}</p>
-
-            {% for  synth_sample in sample.synthesizer_samples %}
-                <p> {{ synth_sample.synth.synth_id }}</p>
-                <audio controls>
-                    <source src="{{ synth_sample.sample_location }}" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
+            {% for dataset in language.datasets %}
+                <tr>
+                    <td>{{ dataset.data_id }}</td>
+                    <td>{{ dataset.source }}</td>
+                    <td>{{ dataset.pass1_utt }}</td>
+                    <td>{{ dataset.pass1_mcd }}</td>
+                    <td>{{ dataset.duration }}</td>
+                    {#               TODO: put the right one      <td>{{ Male }}</td> #}
+                    <td> Female</td>
+                    {% if not dataset.data_location %}
+                        <td> Unavailable</td>
+                    {% else %}
+                        <td><a href="#">Available</a></td>
+                    {% endif %}
+                </tr>
             {% endfor %}
+        </table>
+
+        <h2 class="h2-primary">Synthesizers</h2>
+
+        <table>
+            <tr>
+                <th> synth_id</th>
+                <th> data_id</th>
+                <th> #utt</th>
+                <th> Hrs</th>
+                <th> MCD base</th>
+                <th> MCD rfs</th>
+                <th> Data</th>
+                <th> Flite</th>
+
+            </tr>
+            {% for synthesizer in language.synthesizers %}
+                <tr>
+                    <td>{{ synthesizer.synth_id }}</td>
+                    <td>{{ synthesizer.dataset.data_id }}</td>
+                    <td>{{ synthesizer.rfs_utt }}</td>
+                    <td>{{ synthesizer.rfs_hrs }}</td>
+                    <td>{{ synthesizer.mcd_base }}</td>
+                    <td>{{ synthesizer.mcd_rfs }}</td>
+                    {% if not synthesizer.data_location %}
+                        <td> Unavailable</td>
+                    {% else %}
+                        <td><a href="#"> Download</a></td>
+                    {% endif %}
+                    {% if not synthesizer.flite_location %}
+                        <td> Unavailable</td>
+                    {% else %}
+                        <td><a href="#"> Download </a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </table>
+
+        <h2 class="h2-primary"> Listen to samples </h2>
+
+        {% for sample in language.samples %}
+
+            <div>
+                <p> Text: {{ sample.text }}</p>
+                <p> Pronunciation: {{ sample.pronunciation }}</p>
+
+                {% for  synth_sample in sample.synthesizer_samples %}
+                    <p> {{ synth_sample.synth.synth_id }}</p>
+                    <audio controls>
+                        <source src="{{ synth_sample.sample_location }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                {% endfor %}
+
+            </div>
+        {% endfor %}
+        <div id="synthesize-div">
+            <h2 class="h2-primary"> Synthesize your text!</h2>
+            <form action="{% url 'synthesize' %}" method="POST" id="synthRequestForm" novalidate
+                  name="synthRequestForm">
+                {{ form.as_p }}
+                <button id="synth-btn" onclick="validateSubmit('wait_modal')" type="button">Synthesize</button>
+
+            </form>
+        </div>
+
+        <div id="wait_modal">
+            <div id="wait_modal_content">
+                <p>Please wait while we synthesize your text</p>
+                <img src="{% static 'app/loader.gif' %}" alt="Loading...">
+            </div>
 
         </div>
-    {% endfor %}
-    <div>
-        <h2 class="h2-primary"> Synthesize your text!</h2>
-        <form action="{% url 'synthesize' %}" method="POST" id="synthRequestForm" novalidate name="synthRequestForm">
-            {{ form.as_p }}
-            <button id="synth-btn" onclick="validateSubmit('wait_modal')" type="button" >Synthesize</button>
-
-        </form>
     </div>
-
-    <div id="wait_modal">
-        <div id="wait_modal_content">
-            <p>Please wait while we synthesize your text</p>
-            <img src="{% static 'app/loader.gif' %}" alt="Loading...">
-        </div>
-
-    </div>
-
 
 {% endblock %}
