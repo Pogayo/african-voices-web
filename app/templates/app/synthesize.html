@@ -7,8 +7,14 @@
         <p>{{ errors }}</p>
       {% endif %}
 
+    <div class="content">
+
       <audio controls>
         <source src="/{{ output_file }}" type="audio/mpeg">
         Your browser does not support the audio element.
-    </audio>
+       </audio>
+
+    </div>
+
+
 {% endblock %}
