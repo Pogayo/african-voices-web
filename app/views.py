@@ -9,7 +9,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import SynthesizeForm
-from .models import Language, SynthesizeRequestModel
+from .models import Language, SynthesizeRequestModel, Dataset
 
 
 def delete_audio(audio_path):
@@ -25,7 +25,9 @@ def index(request):
 
 
 def datasets(request):
-    context = {'languages': Language.objects.all(), }
+    datasets = Dataset.objects.all()
+    languages = Language.objects.all()
+    context = {'languages': languages, 'datasets' : datasets, 'num_languages': len(languages), 'num_datasets': len(datasets)}
     return render(request, 'app/datasets.html', context)
 
 
