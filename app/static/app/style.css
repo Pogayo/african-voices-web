@@ -1,11 +1,15 @@
+html, body { height: 100%;}
+
+body > footer {
+  position: sticky;
+  top: 100vh;
+}
 
 #home-logotext {
 
     font-style: normal;
     font-weight: 600;
-    font-size: 48px;
-    line-height: 65px;
-    padding: 15px;
+    font-size: 1.8em;
     color: #BB0000;
     text-decoration: none;
 }
@@ -17,15 +21,13 @@
 }
 
 #map-wrapper {
-    float: right;
-    width: 30%
-
+    width: 100%
 }
 
 #home-exp {
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
+    font-size: 1.2em;
     line-height: 33px;
     color: #000000;
 }
@@ -98,16 +100,12 @@ footer {
 body {
     padding: 0;
     margin: 0;
-    font-family: 'Open Sans';
     box-sizing: content-box;
     min-height: 100%;
-    font-size: 18px;
 }
 
 #home-stats {
     display: grid;
-    /*flex-direction: row;*/
-    /*flex-flow: row wrap;*/
     grid-template-columns: 0.66fr 0.33fr;
     align-items: center;
     flex: 1;
@@ -117,51 +115,69 @@ body {
     text-align: center;
 }
 
+#home-stats > .col{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 .home-stats-item {
     padding: 10px 5px;
-    dislay: flex;
     flex: 1;
     min-width: 0;
-    font-size: 30px
-
+    font-size: 1.5em;
 }
 
-.content {
-    min-height: calc(100vh - 70px);
-    margin-left:20px
+.home-stats-item span{
+    font-size: 2.7em;
 }
 
+.home-container{
+    display: grid;
+    grid-template-columns: 8fr 4fr;
+}
 
-#myUL {
+.home-container > img{
+    width: 400px;
+}
+
+@media only screen and (max-width:970px) {
+    .home-container{
+        grid-template-columns: 1fr;
+    }
+
+    #home-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+#searchUL {
     list-style-type: none;
     padding: 0;
     margin: 0;
-    position: fixed; /* instead of : position:absolute;*/
-    top: 7%; /* instead of : top:100%;*/
+    position: fixed;
+    top: 7%; 
     background-color: white;
-    /*border: 1px solid black;*/
     z-index: 50;
       box-shadow: 0px 2px 10px 2px rgba(136, 136, 136, 0.72);
     border-radius: 5px;
+    width: 25%;
 
 }
 
-#myUL li a {
-    margin-top: -1px; /* Prevent double borders */
+#searchUL li a {
+    margin-top: -1px; 
     padding: 10px;
     text-decoration: none;
     font-size: 18px;
     color: black;
-    display: block;}
-
-
-#myUL li a:hover:not(.header) {
-    background-color:#FFAD00;
-    color: white;
+    display: block;
+    width: 100%;
 }
 
-searchInput {
-    padding: 5px 5px;
+
+#searchUL li a:hover:not(.header) {
+    background-color:#FFAD00;
+    color: white;
 }
 
 
@@ -206,7 +222,9 @@ margin-left: auto;
     display: flex;
     flex-direction: column;
     flex-flow: column nowrap;
-    /*align-items: center;*/
-    /*flex: 1;*/
-    /*min-width: 0;*/
+}
+
+
+.main-content{
+    margin-top: 2em;
 }
