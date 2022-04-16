@@ -12,6 +12,7 @@ class Language(models.Model):
     lang_name = models.CharField(max_length=100)
     lang_native_speakers = models.IntegerField(default=0)
     lang_non_native_speakers = models.IntegerField(default=0)
+    lang_wikipedia_url = models.CharField(max_length=200, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     countries = models.ManyToManyField(Country)

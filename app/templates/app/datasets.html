@@ -1,9 +1,60 @@
 {% extends "app/base_generic.html" %}
 {% block title %}<title>Datasets</title>{% endblock %}
 {% block content %}
-<div>
-    I love datasets!
-</div>
+    <div class="page-content">
+        <p>The AfricanVoices corpus is a speech corpus containing datasets of aligned sentences and audio for
+            some {{ num_languages }} different languages. We obtain the datasets in two ways:
+        <ul>
+            <li>Create and record</li>
+            <li> Align audio books from sources like <a href="https://open.bible/resources/" target="_blank">Open.Bible </a> <a href="https://github.com/getalp/ALFFA_PUBLIC" target="_blank">ALLFA project</a>, <a href="http://www.llsti.org/" target="_blank"> LLSTI </a></li>
+            <li> Obtain single speaker audio-text pairs from sources like <a href="https://commonvoice.mozilla.org/" target="_blank"> Mozilla CommonVoice</a></li>
+        </ul>
+
+        <section id="sect-datasets">
+            <h2 class="h2-primary">Datasets</h2>
+
+            <table>
+                <tr>
+                    <th> Data_id</th>
+                    <th> Lang Code</th>
+                    <th> Language (Wikipedia)</th>
+                    <th> Source</th>
+                    <th> Speaker</th>
+                    <th> #utt</th>
+                    <th> Hrs</th>
+                    <th> MCD</th>
+                    {#                    <th> rfs #utt</th>#}
+                    {#                    <th> rfs #mcd </th>#}
+                    <th> Download</th>
+                </tr>
+                {% for dataset in datasets %}
+                    <tr>
+                        <td>{{ dataset.data_id }}</td>
+                        <td>{{ dataset.lang.lang_code_639_2 }}</td>
+                        {% if not dataset.lang.lang_wikipedia_url %}
+                            <td>{{ dataset.lang.lang_name }}  </td>
+                        {% else %}
+                            <td>
+                                <a href={{ dataset.lang.lang_wikipedia_url }} target="_blank">{{ dataset.lang.lang_name }}</a>
+                            </td>
+                        {% endif %}
+                        <td>{{ dataset.source }}</td>
+                        <td> {{ dataset.speaker_gender }}</td>
+                        <td>{{ dataset.pass1_utt }}</td>
+                        <td>{{ dataset.pass1_mcd }}</td>
+                        <td>{{ dataset.duration }}</td>
+                        {% if not dataset.data_location %}
+                            <td> Unavailable</td>
+                        {% else %}
+                            <td><a href="#">Available</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </table>
+
+        </section>
+
+    </div>
 
 {% endblock %}
 
