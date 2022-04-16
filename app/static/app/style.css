@@ -202,4 +202,11 @@ searchInput {
 margin-left: auto;
     margin-top:1em;
 }
-
+.flex-column{
+    display: flex;
+    flex-direction: column;
+    flex-flow: column nowrap;
+    /*align-items: center;*/
+    /*flex: 1;*/
+    /*min-width: 0;*/
+}
