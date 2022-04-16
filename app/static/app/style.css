@@ -7,6 +7,7 @@
     line-height: 65px;
     padding: 15px;
     color: #BB0000;
+    text-decoration: none;
 }
 
 #home-map {
@@ -77,6 +78,10 @@ footer {
     flex: 1;
 
 }
+.footer_link{
+        color: white;
+        text-decoration: none;
+}
 
 
 .footer-logo {
@@ -96,6 +101,7 @@ body {
     font-family: 'Open Sans';
     box-sizing: content-box;
     min-height: 100%;
+    font-size: 18px;
 }
 
 #home-stats {
@@ -154,16 +160,53 @@ body {
     color: white;
 }
 
-input {
+searchInput {
     padding: 5px 5px;
 }
 
 
-.language-h2{
+.h2-primary{
     font-family: 'Open Sans', serif;
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 33px;
-    color: #FFAD00
+    color: #FFAD00;
+}
+#wait_modal{
+    display: none;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+#wait_modal_content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+}
+
+#page-content{
+    padding: 20px 40px;
+    font-size: 18px;
+}
+
+
+#synth-side-btn{
+margin-left: auto;
+    margin-top:1em;
+}
+.flex-column{
+    display: flex;
+    flex-direction: column;
+    flex-flow: column nowrap;
+    /*align-items: center;*/
+    /*flex: 1;*/
+    /*min-width: 0;*/
 }

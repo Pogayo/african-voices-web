@@ -10,92 +10,94 @@
 </head>
 <body>
 {% block header %}
-<header>
-    <div class="row site-header">
-        <div class="logo" id="home-logotext">
-            African Voices
-        </div>
-        <div class="nav">
+    <header>
+        <div class="row site-header">
+            <div class="logo">
+                <a href="/" id="home-logotext"> African Voices</a>
+            </div>
+            <div class="nav">
 
-            <div id="searchbar">
-                <div class="col-md-12">
-                    <div class="search-bar">
-                        <input type="text" id="myInput" onkeyup="myFunction()"
-                               placeholder="Search datasets and synthesizers"
-                               title="Type in a name">
-                        <ul id="myUL">
+                <div id="searchbar">
+                    <div class="col-md-12">
+                        <div class="search-bar">
+                            <input type="text" id="searchInput" onkeyup="searchResults()"
+                                   placeholder="Search datasets and synthesizers"
+                                   title="Type in a name">
+                            <ul id="myUL">
 
-                            {% for language in languages %}
-                            <li style="display:none"><a href="{% url 'language' language.lang_code_639_2 %}"> {{language.lang_name}} </a></li>
-                            {% endfor %}
-                        </ul>
+                                {% for language in languages %}
+                                    <li style="display:none"><a
+                                            href="{% url 'language' language.lang_code_639_2 %}"> {{ language.lang_name }} </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
 
+                        </div>
                     </div>
                 </div>
+                <a href="{% url 'datasets' %}" class="nav-link">
+                    Datasets
+                </a>
+                <a href="{% url 'flite' %}" class="nav-link">
+                    Use Synthesizers
+                </a>
             </div>
-            <a href="{% url 'datasets' %}" class="nav-link">
-                Datasets
-            </a>
-{#            <a href="{% url 'synthesizers' %}" class="nav-link">#}
-{#                Synthesizers#}
-{#            </a>#}
         </div>
-    </div>
 
-</header>
+    </header>
 {% endblock %}
 {% block sidebar %}<!-- insert default navigation text for every page --> {% endblock %}
 {% block content %}<!-- default content text (typically empty) --> {% endblock %}
 {% block footer %}
-<footer>
-    <div class="row">
-        <div class="footer-logo" id="acknowledge-footer">
-            <h3> Acknowledgments</h3>
+    <footer>
+        <div class="row">
+            <div class="footer-logo" id="acknowledge-footer">
+                <h3> Acknowledgments</h3>
 
-            We appreciate Mozilla CommonVoice, CMU Wilderness ALLFA project, LLSTI and Open.Bible for their
-            work in creating speech datasets.
-            <!--                    <p>CMU Wilderness </p>-->
-            <!--                    <p>ALLFA project </p>-->
-            <!--                    <p>LLSTI</p>-->
-            <!--                    <p>Open.Bible </p>-->
+                We appreciate Mozilla CommonVoice, CMU Wilderness ALLFA project, LLSTI and Open.Bible for their
+                work in creating speech datasets.
+                <!--                    <p>CMU Wilderness </p>-->
+                <!--                    <p>ALLFA project </p>-->
+                <!--                    <p>LLSTI</p>-->
+                <!--                    <p>Open.Bible </p>-->
 
+            </div>
+            <div class="footer-logo" id="contibute-footer">
+                <h3>Contribute!</h3>
+                You can contribute by recording, sharing datasets and building synthesizers.<br>
+                Make an issue or create a pull request on our GitHub page.
+            </div>
+            <div class="footer-logo" id="contact-footer">
+                <h3>Contact us</h3>
+                <a href="https://github.com/Pogayo/african-voices-web" target="_blank" class="footer_link">
+                    GitHub </a><br>
+                Email
+            </div>
+            <div class="footer-logo" id="pub-footer">
+                <h3>Publications</h3>
+                Building African Voices <br>
+            </div>
         </div>
-        <div class="footer-logo" id="contibute-footer">
-            <h3>Contribute!</h3>
-            You can contribute by recording, sharing datasets and building synthesizers.<br>
-            Make an issue or create a pull request on our GitHub page.
-        </div>
-        <div class="footer-logo" id="contact-footer">
-            <h3>Contact us</h3>
-            GitHub <br>
-            Email
-        </div>
-        <div class="footer-logo" id="pub-footer">
-            <h3>Publications</h3>
-            Building African Voices <br>
-        </div>
-    </div>
-</footer>
+    </footer>
 {% endblock %}
 
 </body>
 
 <script>
-    var input = document.getElementById("myInput");
-    input.setAttribute('size',input.getAttribute('placeholder').length);
+    var input = document.getElementById("searchInput");
+    input.setAttribute('size', input.getAttribute('placeholder').length);
 
-    function myFunction() {
+    function searchResults() {
         var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById("myInput");
+        input = document.getElementById("searchInput");
         filter = input.value.toUpperCase();
         ul = document.getElementById("myUL");
         li = ul.getElementsByTagName("li");
-        if (filter.length === 0 ){
+        if (filter.length === 0) {
             for (i = 0; i < li.length; i++) {
                 li[i].style.display = "none";
             }
-        }
-        else {
+        } else {
             for (i = 0; i < li.length; i++) {
                 a = li[i].getElementsByTagName("a")[0];
                 txtValue = a.textContent || a.innerText;
@@ -108,5 +110,22 @@
         }
 
     }
+
+    function validateSubmit(modalId) {
+        var modal = document.getElementById(modalId);
+        var text = document.getElementById('id_text').value;
+        var synth_id = document.getElementById('id_synth_id').value;
+        var checked_audio_format = document.querySelector('input[name = "audio_format"]:checked');
+        if (text !== '' && synth_id !== '' && checked_audio_format != null) {
+            document.synthRequestForm.submit();
+            modal.style.display = "block";
+
+        } else {
+            alert("Please fill in all fields");
+        }
+
+    }
+
+
 </script>
 </html>

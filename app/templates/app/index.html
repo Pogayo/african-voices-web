@@ -1,6 +1,6 @@
 {% extends "app/base_generic.html" %}
 {% load static %}
-{% block title %}<title>Home</title>{% endblock %}
+{% block title %}<title> AfricanVoices: Home</title>{% endblock %}
 
 {% block content %}
 <div class="content">
@@ -13,9 +13,6 @@
     </p>
     <h3>Click to listen to the paragraph in Kenyan English</h3>
     <audio controls>
-        {% comment %}
-        <source src="horse.ogg" type="audio/ogg">
-        {% endcomment %}
         <source src="{% static 'app/sample1.mp3' %}" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
