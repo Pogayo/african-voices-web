@@ -4,7 +4,8 @@
 <head>
     {% block title %}<title>African Voices</title>{% endblock %}
     <link rel="stylesheet" href="{% static 'app/style.css' %}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,45 +15,48 @@
 {% block header %}
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" id="home-logotext" href="/">African Voices</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'datasets' %}">Datasets</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'flite' %}">Usage</a>
-              </li>
-            </ul>
-            <form class="d-flex">
-              <div id="searchbar">
-                <div class="col-md-12">
-                    <div class="search-bar">
-                        <input class="form-control me-2" type="search" id="searchInput" onkeyup="searchResults()"
-                               placeholder="Search datasets and synthesizers"
-                               title="Type in a name">
-                        <ul id="searchUL">
+            <a class="navbar-brand" id="home-logotext" href="/">African Voices</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" id="nav-" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'datasets' %}" id="nav-datasets">Datasets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'flite' %}" id="nav-flite">Usage</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <div id="searchbar">
+                        <div class="col-md-12">
+                            <div class="search-bar">
+                                <input class="form-control me-2" type="search" id="searchInput"
+                                       onkeyup="searchResults()"
+                                       placeholder="Search language"
+                                       title="Type in a name">
+                                <ul id="searchUL">
 
-                            {% for language in languages %}
-                                <li style="display:none"><a
-                                        href="{% url 'language' language.lang_code_639_2 %}"> {{ language.lang_name }} </a>
-                                </li>
-                            {% endfor %}
-                        </ul>
+                                    {% for language in languages %}
+                                        <li style="display:none"><a
+                                                href="{% url 'language' language.lang_code_639_2 %}"> {{ language.lang_name }} </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
 
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
-            </form>
-          </div>
         </div>
-      </nav>
+    </nav>
 {% endblock %}
 <main class="flex-shrink-0">
     <div class="container main-content">
@@ -62,35 +66,35 @@
 </main>
 {% block footer %}
     <footer class="footer">
-        <div class="row">
-            <div class="footer-logo" id="acknowledge-footer">
-                <h3> Acknowledgments</h3>
+        <div class="footer-logo" id="acknowledge-footer">
+            <h3> Acknowledgments</h3>
 
-                We appreciate Mozilla CommonVoice, CMU Wilderness ALLFA project, LLSTI and Open.Bible for their
-                work in creating speech datasets.
+            We appreciate Mozilla CommonVoice, CMU Wilderness ALLFA project, LLSTI and Open.Bible for their
+            work in creating speech datasets.
 
-            </div>
-            <div class="footer-logo" id="contibute-footer">
-                <h3>Contribute!</h3>
-                You can contribute by recording, sharing datasets and building synthesizers.<br>
-                Make an issue or create a pull request on our GitHub page.
-            </div>
-            <div class="footer-logo" id="contact-footer">
-                <h3>Contact us</h3>
-                <a href="https://github.com/Pogayo/african-voices-web" target="_blank" class="footer_link">
-                    GitHub </a><br>
-                Email
-            </div>
-            <div class="footer-logo" id="pub-footer">
-                <h3>Publications</h3>
-                Building African Voices <br>
-            </div>
+        </div>
+        <div class="footer-logo" id="contibute-footer">
+            <h3>Contribute!</h3>
+            You can contribute by recording, sharing datasets and building synthesizers.<br>
+            Make an issue or create a pull request on our GitHub page.
+        </div>
+        <div class="footer-logo" id="contact-footer">
+            <h3>Contact us</h3>
+            <a href="https://github.com/Pogayo/african-voices-web" target="_blank" class="footer_link">
+                GitHub </a><br>
+            Email
+        </div>
+        <div class="footer-logo" id="pub-footer">
+            <h3>Publications</h3>
+            Building African Voices <br>
         </div>
     </footer>
 {% endblock %}
 
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 
 
 <script>
@@ -136,6 +140,28 @@
 
     }
 
+    function setCurrentTab(current_tab) {
+        var current_tab_id = "nav-" + current_tab;
+        var tabs = document.getElementsByClassName('nav-link');
+        for (var i = 0; i < tabs.length; i++) {
+            if (tabs[i].id === current_tab_id) {
+                tabs[i].classList.add('active');
+            } else {
+                tabs[i].classList.remove('active');
+            }
+        }
+    }
+
+    function grabCurrentTab() {
+        var url = window.location.href;
+        var url_split = url.split('/');
+        var current_tab = url_split[url_split.length - 1];
+        console.log(current_tab);
+        return current_tab;
+    }
+
+    setCurrentTab(grabCurrentTab());
+    grabCurrentTab();
 
 </script>
 </html>

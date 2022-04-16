@@ -3,9 +3,9 @@
 {% block title %} <title>{{ language.lang_name }}</title> {% endblock %} # get me language
 {% block content %}
     <div class="page-content">
-        <h1 style="margin-top: -10px"> Language: {{ language.lang_name }}</h1>
+        <h1 style="margin-bottom: 10px"> Language: {{ language.lang_name }}</h1>
 
-        <div class="row" style="margin-top: -30px">
+        <div class="row" style="margin-top: 0px">
             <ul>
                 <li>ISO 693-2 Code: {{ language.lang_code_639_2 }}</li>
                 <li>Language family: Germanic</li>
@@ -21,73 +21,78 @@
 
         </div>
         <section id="sect-datasets">
+
             <h2 class="h2-primary">Datasets</h2>
+            <div class="table-responsive">
 
-            <table>
-                <tr>
-                    <th> Data_id</th>
-                    <th> Source</th>
-                    <th> #utt</th>
-                    <th> MCD</th>
-                    <th> Hrs</th>
-                    <th> Gender</th>
-                    <th> Download</th>
-                </tr>
-                {% for dataset in language.datasets %}
+                <table class="table table-striped">
                     <tr>
-                        <td>{{ dataset.data_id }}</td>
-                        <td>{{ dataset.source }}</td>
-                        <td>{{ dataset.pass1_utt }}</td>
-                        <td>{{ dataset.pass1_mcd }}</td>
-                        <td>{{ dataset.duration }}</td>
-                        <td> {{ dataset.speaker_gender}}</td>
-                        {% if not dataset.data_location %}
-                            <td> Unavailable</td>
-                        {% else %}
-                            <td><a href="#">Available</a></td>
-                        {% endif %}
+                        <th> Data_id</th>
+                        <th> Source</th>
+                        <th> #utt</th>
+                        <th> MCD</th>
+                        <th> Hrs</th>
+                        <th> Gender</th>
+                        <th> Download</th>
                     </tr>
-                {% endfor %}
-            </table>
-
+                    {% for dataset in language.datasets %}
+                        <tr>
+                            <td>{{ dataset.data_id }}</td>
+                            <td>{{ dataset.source }}</td>
+                            <td>{{ dataset.pass1_utt }}</td>
+                            <td>{{ dataset.pass1_mcd }}</td>
+                            <td>{{ dataset.duration }}</td>
+                            <td> {{ dataset.speaker_gender }}</td>
+                            {% if not dataset.data_location %}
+                                <td> Unavailable</td>
+                            {% else %}
+                                <td><a href="#">Available</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
         </section>
 
         <section id="sect-synthesizers">
             <h2 class="h2-primary">Synthesizers</h2>
+            <div class="table-responsive">
 
-            <table>
-                <tr>
-                    <th> synth_id</th>
-                    <th> data_id</th>
-                    <th> #utt</th>
-                    <th> Hrs</th>
-                    <th> MCD base</th>
-                    <th> MCD rfs</th>
-                    <th> Data</th>
-                    <th> Flite</th>
-
-                </tr>
-                {% for synthesizer in language.synthesizers %}
+                <table class="table table-striped">
                     <tr>
-                        <td>{{ synthesizer.synth_id }}</td>
-                        <td>{{ synthesizer.dataset.data_id }}</td>
-                        <td>{{ synthesizer.rfs_utt }}</td>
-                        <td>{{ synthesizer.rfs_hrs }}</td>
-                        <td>{{ synthesizer.mcd_base }}</td>
-                        <td>{{ synthesizer.mcd_rfs }}</td>
-                        {% if not synthesizer.data_location %}
-                            <td> Unavailable</td>
-                        {% else %}
-                            <td><a href="#"> Download</a></td>
-                        {% endif %}
-                        {% if not synthesizer.flite_location %}
-                            <td> Unavailable</td>
-                        {% else %}
-                            <td><a href="#"> Download </a></td>
-                        {% endif %}
+                        <th> synth_id</th>
+                        <th> data_id</th>
+                        <th> #utt</th>
+                        <th> Hrs</th>
+                        <th> MCD base</th>
+                        <th> MCD rfs</th>
+                        <th> Data</th>
+                        <th> Flite</th>
+
                     </tr>
-                {% endfor %}
-            </table>
+                    {% for synthesizer in language.synthesizers %}
+                        <tr>
+                            <td>{{ synthesizer.synth_id }}</td>
+                            <td>{{ synthesizer.dataset.data_id }}</td>
+                            <td>{{ synthesizer.rfs_utt }}</td>
+                            <td>{{ synthesizer.rfs_hrs }}</td>
+                            <td>{{ synthesizer.mcd_base }}</td>
+                            <td>{{ synthesizer.mcd_rfs }}</td>
+                            {% if not synthesizer.data_location %}
+                                <td> Unavailable</td>
+                            {% else %}
+                                <td><a href="#"> Download</a></td>
+                            {% endif %}
+                            {% if not synthesizer.flite_location %}
+                                <td> Unavailable</td>
+                            {% else %}
+                                <td><a href="#"> Download </a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
 
             <h2 class="h2-primary"> Listen to samples </h2>
 
@@ -110,7 +115,7 @@
         </section>
         <section id="sect-synthesize">
             <h2 class="h2-primary"> Synthesize your text!</h2>
-            <form action="{% url 'synthesize' %}" method="POST" id="synthRequestForm" novalidate
+            <form action="{% url 'synthesize' %}" method="POST" id="synthRequestForm"  class="form-control"
                   name="synthRequestForm">
                 {{ form.as_p }}
                 <button id="synth-btn" onclick="validateSubmit('wait_modal')" type="button">Synthesize</button>

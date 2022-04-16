@@ -75,9 +75,13 @@ footer {
     background: #666666;
     width: 100%;
     color: white;
-    display: flex;
-    flex-flow: row wrap;
-    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    /*flex-flow: row wrap;*/
+
+    /*flex: 1;*/
+    padding: 10px 35px;
 
 }
 .footer_link{
@@ -150,6 +154,18 @@ body {
     }
 }
 
+@media only screen and (min-width:800px) and (max-width:970px) {
+
+    footer {
+        grid-template-columns: 1fr 1fr
+    }
+}
+
+@media only screen and (max-width:800px) {
+    footer {
+        grid-template-columns: 1fr
+    }
+}
 #searchUL {
     list-style-type: none;
     padding: 0;
@@ -180,7 +196,6 @@ body {
     color: white;
 }
 
-
 .h2-primary{
     font-family: 'Open Sans', serif;
     font-style: normal;
@@ -209,8 +224,8 @@ body {
 }
 
 .page-content{
-    padding: 20px 40px;
-    font-size: 18px;
+    /*padding: 10px 40px;*/
+    /*font-size: 18px;*/
 }
 
 
@@ -228,3 +243,4 @@ margin-left: auto;
 .main-content{
     margin-top: 2em;
 }
+
