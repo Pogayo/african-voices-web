@@ -43,7 +43,9 @@ def execute_synthesis(context):
 def language(request, lang_code_639_2):
     language = Language.objects.get(lang_code_639_2=lang_code_639_2)
     synthesizer_ids = [(synth.flite_location, synth.synth_id) for synth in language.synthesizer_set.all()]
-    context = {'language': language, 'form': SynthesizeForm(synthesizer_ids), 'languages': Language.objects.all(), }
+    form = SynthesizeForm(synthesizer_ids)
+    print(form.as_p())
+    context = {'language': language, 'form': form , 'languages': Language.objects.all(), }
 
     return render(request, 'app/language.html', context)
 

@@ -97,9 +97,9 @@
     {% endfor %}
     <div>
         <h2 class="h2-primary"> Synthesize your text!</h2>
-        <form action="{% url 'synthesize' %}" method="POST">
+        <form action="{% url 'synthesize' %}" method="POST" id="synthRequestForm" novalidate name="synthRequestForm">
             {{ form.as_p }}
-            <button id="synthesize" onclick="waitingSynthResponse('wait_modal')">Synthesize</button>
+            <button id="synth-btn" onclick="validateSubmit('wait_modal')" type="button" >Synthesize</button>
 
         </form>
     </div>
