@@ -3,47 +3,41 @@
 {% block title %}<title> AfricanVoices: Home</title>{% endblock %}
 
 {% block content %}
-<div class="content">
+<div class="home-container">
 
-
-<div style="float: left; width:60%; padding: 15px;  ">
+<div>
     <p id="home-exp">
         African Voices is a collaborative project that aims to collects high-quality speech (tts) datasets and
         synthesizers for all African languages.
     </p>
-    <h3>Click to listen to the paragraph in Kenyan English</h3>
+    <p>Click to listen to the paragraph in Kenyan English</p>
     <audio controls>
         <source src="{% static 'app/sample1.mp3' %}" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
     <div id="home-stats">
-
         <div class="col">
-            <div class="row">
-                <div id="num-langs" class="home-stats-item" style="color: #666666;">
+            <div id="num-langs" class="home-stats-item" style="color: #666666;">
 
-                <span id="num-langs-count" style="font-size:48px;">
+                <span id="num-langs-count" >
                     {{ num_langs}}
                 </span><br>
 
                         languages
 
-                </div>
-                <div id="num-countries" class="home-stats-item" style="color:#FFAD00;">
+            </div>
+            <div id="num-countries" class="home-stats-item" style="color:#FFAD00;">
 
-                <span id="num-countries-count" style="font-size:48px;">
-                    {{ num_countries }}
-                </span><br>
-                    countries
-                </div>
-
+            <span id="num-countries-count" >
+                {{ num_countries }}
+            </span><br>
+                countries
             </div>
 
-            <div class="row">
-                <div id="num-speakers" class="home-stats-item" style="color: #0023A3">
+            <div id="num-speakers" class="home-stats-item" style="color: #0023A3">
 
-                <span id="num-speakers-count" style="font-size:48px;">
+                <span id="num-speakers-count" >
                     {{ num_speakers}}
                 </span><br>
                     speakers
@@ -51,7 +45,7 @@
                 </div>
                 <div id="num-hours" class="home-stats-item"  style="color:  #12DC0C;">
 
-                <span id="num-hours-count" style="font-size:48px;">
+                <span id="num-hours-count" >
                     {{ num_hours }}
                 </span><br>
                     hours
@@ -59,14 +53,12 @@
 
                 </div>
 
-            </div>
-
         </div>
 
 
     <div id="num-synthesizers" class="home-stats-item">
 
-                <span id="num-synthesizers-count" style="font-size:48px;">
+                <span id="num-synthesizers-count" >
                     {{ num_synthesizers }}
                 </span><br>
         synthesizers
@@ -82,8 +74,6 @@
     <img src="{% static 'app/map.png' %}" id="home-map"/>
     <figcaption style="text-align: center">Geographical distribution of languages covered currently</figcaption>
 </figure>
-
-
 
 </div>
 
