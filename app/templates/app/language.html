@@ -5,7 +5,7 @@
     <div class="page-content">
         <h1 style="margin-bottom: 10px"> Language: {{ language.lang_name }}</h1>
 
-        <div class="row" style="margin-top: 0px">
+        <div class="row" style="margin-top: 0px; display:grid; grid-template-columns: 0.7fr 0.3fr">
             <ul>
                 <li>ISO 693-2 Code: {{ language.lang_code_639_2 }}</li>
                 <li>Language family: Germanic</li>
@@ -13,10 +13,13 @@
                 <li>Countries : {{ language.all_countries }}</li>
             </ul>
 
-            <div class="side-nav flex-column" id="synth-side-btn">
-                Jump to:
-                <button><a href="#sect-synthesizers"> Synthesizers</a></button>
-                <button><a href="#sect-synthesize"> Synthesize text</a></button>
+            <div class="side-nav" id="side-nav-div">
+                <span style="font-weight:bold"> Skip to:</span>
+                <hr style="margin:0px;"/>
+                <ul>
+                    <li><a href="#sect-synthesizers">Synthesizers</a></li>
+                    <li><a href="#sect-synthesize">Synthesize text</a></li>
+                </ul>
             </div>
 
         </div>
@@ -113,14 +116,19 @@
                 </div>
             {% endfor %}
         </section>
-        <section id="sect-synthesize">
+        <section id="sect-synthesize" style="width: 100%" >
             <h2 class="h2-primary"> Synthesize your text!</h2>
-            <form action="{% url 'synthesize' %}" method="POST" id="synthRequestForm"  class="form-control"
-                  name="synthRequestForm">
+
+            <div style="display:flex; flex-direction:column; justify-content: center; align-items: center; width: 100% ; margin-bottom: 25px">
+                <form action="{% url 'synthesize' %}" method="POST" id="synthRequestForm"
+                  name="synthRequestForm" style="max-width:700px">
                 {{ form.as_p }}
-                <button id="synth-btn" onclick="validateSubmit('wait_modal')" type="button">Synthesize</button>
+                <button id="synth-btn" onclick="validateSubmit('wait_modal')" type="button" class="btn btn-primary mb-2" style="background-color: #FFAD00; border: none">Synthesize</button>
 
             </form>
+            </div>
+
+
             <div id="wait_modal">
                 <div id="wait_modal_content">
                     <p>Please wait while we synthesize your text</p>

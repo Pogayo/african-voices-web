@@ -33,7 +33,7 @@ body > footer {
 }
 
 .row {
-    flex-flow: row nowrap;
+    flex-flow: row ;
     display: flex;
     flex-wrap: wrap;
     flex: 1;
@@ -229,9 +229,24 @@ body {
 }
 
 
-#synth-side-btn{
-margin-left: auto;
+#side-nav-div{
+    margin-left: auto;
     margin-top:1em;
+}
+
+.side-nav > ul{
+    list-style: none;
+    background-color: rgba(0, 0, 0, 0.05);
+
+}
+.side-nav > ul >li>a{
+    text-decoration:none;
+    color: #000000;
+
+}
+.side-nav > ul >li{
+    border-bottom: 1px solid #dee2e6 ;
+    padding:5px 0px
 }
 .flex-column{
     display: flex;
