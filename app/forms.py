@@ -16,9 +16,10 @@ class SynthesizeForm(Form):
             # [(synthesizer.id, synthesizer.name) for synthesizer in synthesizers] recommended by copilot
 
         self.fields['text'] = forms.CharField(label='Input', required=True, widget=forms.Textarea(
-            attrs={'name': 'body', 'rows': '10', 'cols': '80', 'placeholder': 'Enter text here...'}))
+            attrs={'name': 'body', 'rows': '10', 'cols': '80', 'placeholder': 'Enter text here...', 'class':'form-control'}))
         self.fields['synth_id'] = forms.ChoiceField(label='Synthesizer', required=True,
-                                                    choices=tuple([synthesizer for synthesizer in synthesizers]))
+                                                    choices=tuple([synthesizer for synthesizer in synthesizers]), widget=forms.Select(
+                                                    attrs={'class':'form-control'}))
         self.fields['audio_format'] = forms.ChoiceField(label='Audio format', required=True, choices=self.AUDIO_FORMAT, widget=forms.RadioSelect)
 
     class Meta:
