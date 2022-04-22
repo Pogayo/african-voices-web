@@ -9,6 +9,19 @@
   * Run `python manage.py runserver` on the project root folder to run project on local machine
   
 # System Requirements
-For the project to work, you need to have the following installed:
-* [Festvox](https://github.com/festvox/festvox#installation) and its dependencies
-* Lame
+For the project to work, you need to have festvox and its dependencies installed.
+ 1. Install prerequisites:
+```
+sudo apt-get install git build-essential libncurses5-dev sox wget
+sudo apt-get install csh ffmpeg html2text
+```
+ 2. Download and run [fest_build.sh](http://tts.speech.cs.cmu.edu/awb/11-492/homework/tts/fest_build.sh).
+On your terminal run:
+```
+chmod +x festvox_setup.sh
+./festvox_setup.sh
+```
+Learn more about [Festvox](https://github.com/festvox/festvox#installation)
+
+# Want to create your own synthesizer?
+Follow the instructions in [NewlangTech](https://github.com/neulab/newlang-tech/tree/main/speech-synthesis) to create your own synthesizer in simple steps.

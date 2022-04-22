@@ -13,6 +13,7 @@ class Synthesizer(models.Model):
     rfs_hrs = models.FloatField(default=0.0)
     mcd_base = models.FloatField(default=0)
     mcd_rfs = models.FloatField(default=0)
+    is_main = models.BooleanField(default=False)
     data_location = models.CharField(max_length=256)
     flite_location = models.CharField(max_length=256)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -47,4 +48,4 @@ class SynthesizeRequestModel(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.synth_id + ' - ' + self.created_at[:20]
+        return self.synth_id

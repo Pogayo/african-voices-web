@@ -89,4 +89,4 @@ def flite(request):
 
 
 def is_empty(s):
-    return not s
+    return not s or not s.strip()
