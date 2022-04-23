@@ -27,6 +27,6 @@ $FLITEDIR/bin/flite  -voice $voice  file  $output.wav
 #convert to audio format
 if [ $format == "mp3" ]; then
     echo "Converting to wav"
-    lame $output.wav $output.mp3
+    ffmpeg -i $output.wav  -f mp3 $output.mp3
     rm $output.wav
 fi

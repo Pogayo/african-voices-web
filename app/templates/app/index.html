@@ -1,6 +1,6 @@
 {% extends "app/base_generic.html" %}
 {% load static %}
-{% block title %}<title> AfricanVoices: Home</title>{% endblock %}
+{% block title %}<title> AfricanVoices: African Text to Speech </title>{% endblock %}
 
 {% block content %}
 <div class="home-container">
@@ -12,7 +12,7 @@
     </p>
     <p>Click to listen to the paragraph in Kenyan English</p>
     <audio controls>
-        <source src="{% static 'app/sample1.mp3' %}" type="audio/mpeg">
+        <source src="{% static 'app/sample1.mp3' %}" type="audio/mpeg" >
         Your browser does not support the audio element.
     </audio>
 
@@ -71,7 +71,7 @@
 </div>
 
 <figure id="map-wrapper">
-    <img src="{% static 'app/map.png' %}" id="home-map"/>
+    <img src="{% static 'app/map.png' %}" id="home-map" alt="Map of Africa depicting languages covered in AfricanVoices"/>
     <figcaption style="text-align: center">Geographical distribution of languages covered currently</figcaption>
 </figure>
 
