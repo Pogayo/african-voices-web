@@ -1,5 +1,5 @@
 # african-voices-web
-
+Visit the African Voices website [here](https://www.africanvoices.tech).
 ## Installation
   * Install python 2.7 or newer
   * Create a virtual environment `python3 -m venv virtual_environment_name`

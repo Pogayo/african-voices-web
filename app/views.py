@@ -19,7 +19,7 @@ def delete_audio(audio_path):
 
 def index(request):
     context = {'languages': Language.objects.all(),
-               'num_synthesizers': 20, "num_countries": 20, "num_langs": 11, "num_speakers": 14, "num_hours": 600}
+               'num_synthesizers': 20, "num_countries": 20, "num_langs": 11, "num_speakers": 14, "num_hours": 120}
 
     return render(request, 'app/index.html', context)
 
