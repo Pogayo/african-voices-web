@@ -108,7 +108,7 @@
                     {% for  synth_sample in sample.synthesizer_samples %}
                         <p> {{ synth_sample.synth.synth_id }}</p>
                         <audio controls>
-                            <source src="{{ synth_sample.sample_location }}" type="audio/mpeg">
+                            <source src="app/{{ synth_sample.sample_location }}" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
                     {% endfor %}
