@@ -21,12 +21,16 @@ echo "voice: $voice";
 echo "input: $input";
 echo "output: $output";
 
-echo $input > file
-$FLITEDIR/bin/flite  -voice $voice  file  $output.wav
+echo $input > $output.txt
+_$voice  $output.txt $output.wav
 
 #convert to audio format
 if [ $format == "mp3" ]; then
-    echo "Converting to wav"
-    ffmpeg -i $output.wav  -f mp3 $output.mp3
+    echo "Converting to mp3"
+    ffmpeg -i $output.wav  -f mp3 $output.mp3\
+    echo "finished converting"
     rm $output.wav
 fi
+rm -r $output.txt
+
+Ṣé dáadáa ni
