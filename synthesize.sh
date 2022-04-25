@@ -22,7 +22,7 @@ echo "input: $input";
 echo "output: $output";
 
 echo $input > $output.txt
-_$voice  $output.txt $output.wav
+$FLITEDIR/bin/flite  -voice $voice  $output.txt $output.wav
 
 #convert to audio format
 if [ $format == "mp3" ]; then
@@ -33,4 +33,3 @@ if [ $format == "mp3" ]; then
 fi
 rm -r $output.txt
 
-Ṣé dáadáa ni
