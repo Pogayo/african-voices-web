@@ -16,8 +16,8 @@ class Dataset(models.Model):
     speaker_gender = models.CharField(choices=Gender.choices, max_length=100, blank=True)
     pass0_utt = models.FloatField(max_length=100,  blank=True)
     pass0_mcd = models.FloatField(max_length=100, blank=True)
-    pass1_utt = models.IntegerField(default=0)  # display
-    pass1_mcd = models.FloatField(default=0)  # display
+    pass1_utt = models.IntegerField(default=0, blank=True)  # display
+    pass1_mcd = models.FloatField(default=0, blank=True)  # display
     duration = models.FloatField(default=0)
     data_location = models.CharField(max_length=256, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
