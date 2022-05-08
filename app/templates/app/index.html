@@ -1,41 +1,61 @@
 {% extends "app/base_generic.html" %}
 {% load static %}
-{% block title %}<title> AfricanVoices: Home</title>{% endblock %}
+{% block title %}<title> AfricanVoices: African Text to Speech </title>{% endblock %}
 
 {% block content %}
-<div class="content">
+    <div class="home-container">
+        <div>
+            <p class="home-exp">
+                African Voices is a collaborative project that aims to collects high-quality speech (tts) datasets and
+                synthesizers for all African languages. You can search datasets and synthesizers by language. You can
+                also synthesize text from your synthesizer of choice. Additionally, you can download the synthesizers
+                and use them on your phone, desktop or browser.
+            </p>
 
+            <p>Listen to the paragraph in Kenyan English</p>
+            <audio controls>
+                <source src="{% static 'app/sample1.mp3' %}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <p class="home-exp"> African Voises en chenro ma kanyakla ma choko data mar duondji gi sinthesaiza mar dhog
+                joafrika.
+                Inyalo manyo data kata sinthesaiza kichako gi dhok. Inyalo yudo dwond wach ni ka itiyo gi sinthesaiza
+                midwaro. Kendo, inyalo daonlod sinthesaiza mondo itii kodgi e simbi kata kompyuta ni.
+            </p>
+            <p> Listen to the paragraph in <a href="https://en.wikipedia.org/wiki/Dholuo"> Luo </a></p>
+            <audio controls>
+                <source src="{% static 'app/luo_sample.mp3' %}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
 
-<div style="float: left; width:60%; padding: 15px;  ">
-    <p id="home-exp">
-        African Voices is a collaborative project that aims to collects high-quality speech (tts) datasets and
-        synthesizers for all African languages.
-    </p>
-    <h3>Click to listen to the paragraph in Kenyan English</h3>
-    <audio controls>
-        <source src="{% static 'app/sample1.mp3' %}" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+            <p class="home-exp"> African Voises ni mradi shirikishi unaolenga kukusanya seti za data za usemi na sinthesaiza za ubora wa juu (tts) za lugha zote za Kiafrika.
+                Unaweza kutafuta seti za data na sinthesaiza kwa lugha. Unaweza pia kuunganisha maandishi kutoka kwa sinthesaiza yako ya chaguo.
+                Zaidi ya hayo, unaweza kupakua sinthesaiza na kuzitumia kwenye simu yako, kompyuta  au kivinjari.
 
-    <div id="home-stats">
+            </p>
+            <p> Listen to the paragraph in <a href="https://en.wikipedia.org/wiki/Swahili_language"> Kiswahili </a></p>
+            <audio controls>
+                <source src="{% static 'app/kis_sample.mp3' %}" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
 
-        <div class="col">
-            <div class="row">
+        <div id="home-stats">
+            <div class="col">
                 <div id="num-langs" class="home-stats-item" style="color: #666666;">
 
-                <span id="num-langs-count" style="font-size:48px;">
-                    {{ num_langs}}
+                <span id="num-langs-count">
+                    {{ num_langs }}
                 </span><br>
 
-                        languages
+                    languages
 
                 </div>
                 <div id="num-countries" class="home-stats-item" style="color:#FFAD00;">
 
-                <span id="num-countries-count" style="font-size:48px;">
-                    {{ num_countries }}
-                </span><br>
-
+            <span id="num-countries-count">
+                {{ num_countries }}
+            </span><br>
+                    countries
                 </div>
 
             </div>
@@ -43,15 +63,15 @@
             <div class="row">
                 <div id="num-speakers" class="home-stats-item" style="color: #0023A3">
 
-                <span id="num-speakers-count" style="font-size:48px;">
-                    {{ num_speakers}}
+                <span id="num-speakers-count">
+                    {{ num_speakers }}
                 </span><br>
                     speakers
 
                 </div>
-                <div id="num-hours" class="home-stats-item"  style="color:  #12DC0C;">
+                <div id="num-hours" class="home-stats-item" style="color:  #12DC0C;">
 
-                <span id="num-hours-count" style="font-size:48px;">
+                <span id="num-hours-count">
                     {{ num_hours }}
                 </span><br>
                     hours
@@ -61,31 +81,28 @@
 
             </div>
 
+
+            <div id="num-synthesizers" class="home-stats-item">
+
+                <span id="num-synthesizers-count">
+                    {{ num_synthesizers }}
+                </span><br>
+                synthesizers
+
+
+            </div>
+
+        </div>
         </div>
 
 
-    <div id="num-synthesizers" class="home-stats-item">
-
-                <span id="num-synthesizers-count" style="font-size:48px;">
-                    {{ num_synthesizers }}
-                </span><br>
-        synthesizers
-
+    <figure id="map-wrapper">
+        <img src="{% static 'app/map.png' %}" id="home-map"
+             alt="Map of Africa depicting languages covered in AfricanVoices"/>
+        <figcaption style="text-align: center">Geographical distribution of languages covered currently</figcaption>
+    </figure>
 
     </div>
-
-</div>
-
-</div>
-
-<figure id="map-wrapper">
-    <img src="{% static 'app/map.png' %}" id="home-map"/>
-    <figcaption style="text-align: center">Geographical distribution of languages covered currently</figcaption>
-</figure>
-
-
-
-</div>
 
 {% endblock %}
 
