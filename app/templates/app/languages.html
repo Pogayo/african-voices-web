@@ -6,6 +6,15 @@
         <h1 style="margin-top: -10px"> AfricanVoices: Languages </h1>
        Our aim is to cover as many African languages as possible. Click on a language to view the resources available for that language.
         Which language would you like to see?
+
+     <div style="display:flex; flex-direction:column; justify-content: center; align-items: center; width: 100% ; margin-bottom: 25px">
+                <form action="{% url 'languages' %}" method="POST" id="addLanguageForm"
+                  name="addLanguageForm" style="max-width:700px">
+                {{ form.as_p }}
+                <button id="synth-btn" onclick="validateSubmit('wait_modal')" type="button" class="btn btn-primary mb-2" style="background-color: #FFAD00; border: none">Submit</button>
+
+            </form>
+     </div>
         <br/><br/>
 
         <ul >

@@ -8,7 +8,7 @@ from uuid import uuid4
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import SynthesizeForm
+from .forms import SynthesizeForm, AddLanguageForm
 from .models import Language, SynthesizeRequestModel, Dataset
 
 
@@ -87,7 +87,8 @@ def flite(request):
     return render(request, 'app/flite.html', context)
 
 def languages(request):
-    context = {'languages': Language.objects.all(), }
+    form = AddLanguageForm()
+    context = {'languages': Language.objects.all(),  'form': form, 'num_languages': len(Language.objects.all())}
     return render(request, 'app/languages.html', context)
 
 def is_empty(s):
