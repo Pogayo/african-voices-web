@@ -86,6 +86,9 @@ def flite(request):
     context = {'languages': Language.objects.all(), }
     return render(request, 'app/flite.html', context)
 
+def languages(request):
+    context = {'languages': Language.objects.all(), }
+    return render(request, 'app/languages.html', context)
 
 def is_empty(s):
     return not s or not s.strip()
