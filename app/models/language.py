@@ -31,9 +31,11 @@ class Language(models.Model):
     @property
     def datasets(self):
         return self.dataset_set.all()
+
     @property
     def synthesizers(self):
         return self.synthesizer_set.all()
+
     @property
     def samples(self):
         return self.language_sample_set.all()
@@ -54,3 +56,16 @@ class LanguageSample(models.Model):
     @property
     def synthesizer_samples(self):
         return self.synthesizer_samples_set.all()
+
+
+class AddLanguage(models.Model):
+    uuid = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+    name = models.CharField(max_length=100)
+    wikipedia_url = models.CharField(max_length=200, blank=True)
+    comment = models.TextField(max_length=100000, blank=True)
+    email = models.EmailField(max_length=200, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self)-> str:
+        return self.name+" ("+self.email+")"

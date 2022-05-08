@@ -9,7 +9,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import SynthesizeForm, AddLanguageForm
-from .models import Language, SynthesizeRequestModel, Dataset
+from .models import Language, SynthesizeRequestModel, Dataset ,AddLanguage
 
 
 def delete_audio(audio_path):
@@ -86,7 +86,19 @@ def flite(request):
     context = {'languages': Language.objects.all(), }
     return render(request, 'app/flite.html', context)
 
+@csrf_exempt
 def languages(request):
+    context = {}
+
+    if request.method == 'POST':
+        context['name'] = request.POST.get('name')
+        context['wikipedia_url'] = request.POST.get("wikipedia_url")
+        context['comment'] = request.POST.get("comment")
+        context['email'] = request.POST.get("email")
+
+        AddLanguage.objects.create(**context)
+
+
     form = AddLanguageForm()
     context = {'languages': Language.objects.all(),  'form': form, 'num_languages': len(Language.objects.all())}
     return render(request, 'app/languages.html', context)

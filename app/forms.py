@@ -42,9 +42,9 @@ class AddLanguageForm(Form):
 
         super(AddLanguageForm, self).__init__(*args, **kwargs)
         self.fields['name'] = forms.CharField(label='Name of language', required=True, widget=forms.TextInput( attrs={'name': 'name', 'placeholder': 'Enter language name...', 'class':'form-control'}))
-        self.fields['wikipedia'] =  forms.URLField(label='Wikipedia url', required=False, widget=forms.URLInput( attrs={'name': 'wikipedia', 'placeholder': 'Enter wikipedia url...', 'class':'form-control'}))
+        self.fields['wikipedia_url'] = forms.URLField(label='Wikipedia url', required=False, widget=forms.URLInput( attrs={'name': 'wikipedia', 'placeholder': 'Enter wikipedia url...', 'class':'form-control'}))
         self.fields['comment'] = forms.CharField(label='Comment', required=False, widget=forms.Textarea(
             attrs={'name': 'body', 'rows': '5', 'cols': '80', 'placeholder': 'Any other info such as countries where it is spoken...',
                    'class': 'form-control'}))
-        self.fields['email'] =  forms.EmailField(max_length = 200, widget = forms.EmailInput(attrs={'name': 'email', 'placeholder': 'Enter email...', 'class':'form-control'}))
+        self.fields['email'] =  forms.EmailField(max_length = 200, required=False, widget = forms.EmailInput(attrs={'name': 'email', 'placeholder': 'Enter email...', 'class':'form-control'}))
 
