@@ -51,7 +51,6 @@ def language(request, lang_code_639_2):
 
     return render(request, 'app/language.html', context)
 
-
 @csrf_exempt
 def synthesize(request):
     context = {}
