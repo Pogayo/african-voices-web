@@ -1,6 +1,6 @@
 {% extends "app/base_generic.html" %}
 {% load static %}
-{% block title %} <title>{{ language.lang_name }}</title> {% endblock %}
+{% block title %} <title>{{ language.lang_name }}</title> {% endblock %} # get me language
 {% block content %}
     <div class="page-content">
         <h1 style="margin-bottom: 10px"> Language: {{ language.lang_name }}</h1>
@@ -11,6 +11,7 @@
                 <li>Language family: Germanic</li>
                 <li> Number of speakers: {{ language.total_speakers }}</li>
                 <li>Countries : {{ language.all_countries }}</li>
+		<li><a href="{{ language.lang_wikipedia_url}}" target=_blank>Wikipedia link</a></li>
             </ul>
 
             <div class="side-nav" id="side-nav-div">
@@ -49,7 +50,7 @@
                             {% if not dataset.data_location %}
                                 <td> Unavailable</td>
                             {% else %}
-                                <td><a href="#">Available</a></td>
+                                <td><a href="{% static 'app/'  %}{{dataset.data_location }}">Download</a></td>
                             {% endif %}
                         </tr>
                     {% endfor %}
@@ -84,12 +85,12 @@
                             {% if not synthesizer.data_location %}
                                 <td> Unavailable</td>
                             {% else %}
-                                <td><a href="#"> Download</a></td>
+                                <td><a href="{% static 'app/'  %}{{synthesizer.data_location }}"> Download</a></td>
                             {% endif %}
                             {% if not synthesizer.flite_location %}
                                 <td> Unavailable</td>
                             {% else %}
-                                <td><a href="#"> Download </a></td>
+                                <td><a href="{% static 'app/'  %}{{synthesizer.flite_location }}"> Download </a></td>
                             {% endif %}
                         </tr>
                     {% endfor %}
@@ -108,7 +109,7 @@
                     {% for  synth_sample in sample.synthesizer_samples %}
                         <p> {{ synth_sample.synth.synth_id }}</p>
                         <audio controls>
-                            <source src="app/{{ synth_sample.sample_location }}" type="audio/mpeg">
+                            <source src="{% static 'app/'  %}{{synth_sample.sample_location}}" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
                     {% endfor %}

@@ -1,0 +1,17 @@
+{% extends "app/base_generic.html" %}
+{% load static %}
+{% block title %} <title>{{ "AfricanVoices: Languages" }}</title> {% endblock %} # get me language
+{% block content %}
+    <div class="content">
+        <h1 style="margin-top: -10px"> AfricanVoices: Languages </h1>
+       Our aim is to cover as many African languages as possible. Click on a language to view the resources available for that language.
+        <ul >
+            {% for language in languages %}
+                <li ><a
+                        href="{% url 'language' language.lang_code_639_2 %}"> {{ language.lang_name }} </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock %}

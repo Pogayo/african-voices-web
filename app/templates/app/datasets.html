@@ -1,4 +1,6 @@
 {% extends "app/base_generic.html" %}
+{% load static %}
+
 {% block title %}<title>TTS Datasets for African languages</title>{% endblock %}
 {% block content %}
     <div class="page-content">
@@ -24,7 +26,7 @@
                     <tr>
                         <th scope="col"> Data_id</th>
                         <th scope="col"> Lang Code</th>
-                        <th scope="col"> Language (Wikipedia)</th>
+                        <th scope="col"> Language</th>
                         <th scope="col"> Source</th>
                         <th scope="col"> Speaker</th>
                         <th scope="col"> #utt</th>
@@ -42,7 +44,7 @@
                                 <td>{{ dataset.lang.lang_name }}  </td>
                             {% else %}
                                 <td>
-                                    <a href={{ dataset.lang.lang_wikipedia_url }} target="_blank">{{ dataset.lang.lang_name }}</a>
+                                    <a href="{% url 'language' dataset.lang.lang_code_639_2 %}" target="_blank">{{ dataset.lang.lang_name }}</a>
                                 </td>
                             {% endif %}
                             <td>{{ dataset.source }}</td>
@@ -51,9 +53,9 @@
                             <td>{{ dataset.duration }}</td>
                             <td>{{ dataset.pass1_mcd }}</td>
                             {% if not dataset.data_location %}
-                                <td> Unavailable</td>
+                                <td> *Unavailable</td>
                             {% else %}
-                                <td><a href="#">Available</a></td>
+                                <td><a href="{% static 'app/'  %}{{dataset.data_location}}" download target=_blank>Available</a></td>
                             {% endif %}
                         </tr>
                     {% endfor %}
@@ -63,6 +65,8 @@
         </section>
 
     </div>
-
+    *Suba data is unavailable because the license doesn't allow us to redistribute. You can download it from the <a href="https://www.faithcomesbyhearing.com/audio-bible-resources/mp3-downloads" target=_blank >Faith Comes by Hearing </a> website for your personal use.
+    <br>
+    <br>
 {% endblock %}
 

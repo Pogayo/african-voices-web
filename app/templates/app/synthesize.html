@@ -1,19 +1,19 @@
 {% extends "app/base_generic.html" %}
 {% load static %}
 
-{% block title %}<title> Synthesis results </title>{% endblock %}
+{% block title %}<title> Synthesis results</title>{% endblock %}
 
 {% block content %}
 
-    {% if errors %}
+      {% if errors %}
         <p>{{ errors }}</p>
-    {% endif %}
+      {% endif %}
+      
+       <p>There you go!</p>
+       <p>Your text: {{ text }}</p>
 
-    <p>There you go!</p>
-    <p>Your text: {{ text }}</p>
-
-    <audio controls>
-        <source src="/{{ output_file }}" type="audio/mpeg">
+      <audio controls>
+	      <source src="{% static ''  %}{{output_file}}" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 {% endblock %}
