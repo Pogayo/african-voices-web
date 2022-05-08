@@ -27,10 +27,10 @@ body > footer {
     width: 100%
 }
 
-#home-exp {
+.home-exp {
     font-style: normal;
-    font-weight: 400;
-    font-size: 1.2em;
+    font-weight: 350;
+    font-size: 1.1em;
     line-height: 33px;
     color: #000000;
 }
@@ -157,6 +157,11 @@ body {
     #home-stats {
         grid-template-columns: 1fr;
     }
+
+    #languages {
+        grid-template-columns: 1fr
+
+    }
 }
 
 @media only screen and (min-width: 800px) and (max-width: 970px) {
@@ -203,7 +208,6 @@ body {
 }
 
 .h2-primary {
-    font-family: 'Open Sans', serif;
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -270,7 +274,7 @@ body {
     margin-top: 2em;
 }
 
-pre{
+pre {
     background-color: #f8f9fa;
     border-radius: 5px;
     padding: 10px;
@@ -279,3 +283,9 @@ pre{
     font-weight: 400;
     line-height: 33px;
     color: #000000;
+}
+
+#languages{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

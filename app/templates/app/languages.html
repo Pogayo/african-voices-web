@@ -3,27 +3,31 @@
 {% block title %} <title>{{ "AfricanVoices: Languages" }}</title> {% endblock %} # get me language
 {% block content %}
     <div class="content">
-        <h1 style="margin-top: -10px"> AfricanVoices: Languages </h1>
-       Our aim is to cover as many African languages as possible. Click on a language to view the resources available for that language.
-        Which language would you like to see?
-
-     <div style="display:flex; flex-direction:column; justify-content: center; align-items: center; width: 100% ; margin-bottom: 25px">
-                <form action="{% url 'languages' %}" method="POST" id="addLanguageForm"
+    <h1 style="margin-top: -10px"> AfricanVoices: Languages </h1>
+    So far, we have  covered {{ num_languages }} languages. Our aim is to cover as many African languages as possible. Click on a language to view the resources available for
+    that language.
+    <div id="languages">
+        <div>
+            <ul>
+                {% for language in languages %}
+                    <li><a
+                            href="{% url 'language' language.lang_code_639_2 %}"> {{ language.lang_name }} </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div style="display:flex; flex-direction:column; justify-content: center; align-items: center; width: 100% ; margin-bottom: 25px">
+            Which language would you like to see? Let us know in the form below.
+            <form action="{% url 'languages' %}" method="POST" id="addLanguageForm"
                   name="addLanguageForm" style="max-width:700px">
                 {{ form.as_p }}
-                <button id="synth-btn" onclick="validateSubmit('wait_modal')" type="button" class="btn btn-primary mb-2" style="background-color: #FFAD00; border: none">Submit</button>
+                <button id="addlang-btn" onclick="validateSubmit('wait_modal')" type="button" class="btn btn-primary mb-2"
+                        style="background-color: #FFAD00; border: none">Submit
+                </button>
 
             </form>
-     </div>
-        <br/><br/>
-
-        <ul >
-            {% for language in languages %}
-                <li ><a
-                        href="{% url 'language' language.lang_code_639_2 %}"> {{ language.lang_name }} </a>
-                </li>
-            {% endfor %}
-        </ul>
+        </div>
     </div>
+    <div>
 
 {% endblock %}
