@@ -46,5 +46,5 @@ class AddLanguageForm(Form):
         self.fields['comment'] = forms.CharField(label='Comment', required=False, widget=forms.Textarea(
             attrs={'name': 'body', 'rows': '5', 'cols': '80', 'placeholder': 'Any other info such as countries where it is spoken...',
                    'class': 'form-control'}))
-        self.fields['email'] =  forms.EmailField(max_length = 200, required=False, widget = forms.EmailInput(attrs={'name': 'email', 'placeholder': 'Enter email...', 'class':'form-control'}))
+        self.fields['email'] =  forms.EmailField(max_length = 200, required=False, widget = forms.EmailInput(attrs={'name': 'email', 'placeholder': 'Where we can reach you', 'class':'form-control'}))
 

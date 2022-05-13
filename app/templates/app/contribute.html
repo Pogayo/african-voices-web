@@ -1,0 +1,43 @@
+{% extends "app/base_generic.html" %}
+{% load static %}
+{% block title %} <title>{{ "AfricanVoices: Contribute" }}</title> {% endblock %} # get me language
+{% block content %}
+    <div class="content">
+        <h1 style="margin-top: -10px"> Contibute </h1>
+        You can contribute by recording your voice, sending us text in your language, building synthesizers or by
+        validating data.
+
+        <h2 class="h2-primary"> AfricanVoices Number dictionary </h2>
+        This is a project to learn how to spell and speak numbers in different languages.
+
+        If you want to contribute, you can send us a text in your language by making a pull request in this <a
+            href="https://github.com/neulab/AfricanVoices/tree/main/number_dictionaries">GitHub repository</a>.
+        You can also record yourself speaking the numbers and upload it <a
+            href="https://huggingface.co/spaces/chrisjay/afro-speech">here</a>
+
+        {#        TODO: Add a contact form#}
+
+        {#    <div id="languages">#}
+        {#        <div>#}
+        {#            <ul>#}
+        {#                {% for language in languages %}#}
+        {#                    <li><a#}
+        {#                            href="{% url 'language' language.lang_code_639_2 %}"> {{ language.lang_name }} </a>#}
+        {#                    </li>#}
+        {#                {% endfor %}#}
+        {#            </ul>#}
+        {#        </div>#}
+        {#        <div style="display:flex; flex-direction:column; justify-content: center; align-items: center; width: 100% ; margin-bottom: 25px">#}
+        {#            <h5> Which language would you like to see? Let us know in the form below. </h5>#}
+        {#            <form action="{% url 'languages' %}" method="POST" id="addLanguageForm"#}
+        {#                  name="addLanguageForm" style="max-width:700px">#}
+        {#                {{ form.as_p }}#}
+        {#                <button id="addlang-btn" type="submit" class="btn btn-primary mb-2"#}
+        {#                        style="background-color: #FFAD00; border: none">Submit#}
+        {#                </button>#}
+        {##}
+        {#            </form>#}
+        {#        </div>#}
+    </div>
+
+{% endblock %}

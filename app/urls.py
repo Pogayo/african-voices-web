@@ -9,5 +9,6 @@ urlpatterns = [
     path('synthesize', views.synthesize, name='synthesize'),
     path('languages', views.languages, name='languages'),
     path('flite', views.flite, name='flite'),
+    path('contribute', views.contribute, name='contribute'),
 
 ]

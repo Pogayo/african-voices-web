@@ -103,5 +103,10 @@ def languages(request):
     context = {'languages': Language.objects.all(),  'form': form, 'num_languages': len(Language.objects.all())}
     return render(request, 'app/languages.html', context)
 
+def contribute(request):
+    context = {'languages': Language.objects.all(), }
+    return render(request, 'app/contribute.html', context)
+
+
 def is_empty(s):
     return not s or not s.strip()
