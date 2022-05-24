@@ -5,11 +5,28 @@ from django.db import models
 from .country import Country
 
 
+class LangFamily(models.TextChoices):
+    NIGER_CONGO = "Niger–Congo"
+    AUSTRONESIAN = "Austronesian"
+    TRANS_NEW_GUINEA = "Trans–New Guinea"
+    SINO_TIBETAN = "Sino-Tibetan"
+    INDO_EUROPEAN = "Indo-European"
+    AUSTRALIAN = "Australian"
+    AFRO_ASIATIC = "Afro-Asiatic"
+    NILO_SAHARAN = "Nilo-Saharan"
+    OTO_MANGUEAN = "Oto-Manguean"
+    AUSTROASIATIC = "Austroasiatic"
+    TAI_KADAI = "Tai–Kadai"
+    DRAVIDIAN = "Dravidian"
+    TUPIAN = "Tupian"
+
+
 class Language(models.Model):
     uuid = models.CharField(primary_key=True, unique=True, default=uuid4, max_length=100)
     lang_code_639_2 = models.CharField(max_length=100)
     lang_code_639_1 = models.CharField(max_length=100)
     lang_name = models.CharField(max_length=100)
+    lang_family = models.CharField(choices=LangFamily.choices, max_length=100, blank=True)
     lang_native_speakers = models.IntegerField(default=0)
     lang_non_native_speakers = models.IntegerField(default=0)
     lang_wikipedia_url = models.CharField(max_length=200, blank=True)

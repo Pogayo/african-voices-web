@@ -3,7 +3,7 @@
 {% block title %}<title>How to use our synthesizers</title>{% endblock %}
 {% block content %}
     <div class="page-content">
-{#     TODO: Recommend book reader, curl command - limit the amount of sentences to convert #}
+        {#     TODO: Recommend book reader, limit the amount of sentences to convert #}
         <h1>Flite</h1>
         <p> You might want to use the voices on your mobile applications, browser, or desktop. With <a
                 href="http://cmuflite.org/" target="_blank">Flite</a>, a
@@ -44,13 +44,30 @@
 
         <h2 class="h2-primary"> Flite for developers</h2>
         {#    TODO: Update this#}
-        <h3>Android developers</h3>
+        <h3  style="font-size: 20px" >Android developers</h3>
         You can find the source code Flite TTS engine for Android on
         <a href="https://github.com/happyalu/Flite-TTS-Engine-for-Android" target="_blank">Github </a>
         If you are developing an application and would like to use Flite for speech synthesis, you can
         specify "edu.cmu.cs.speech.tts.flite" as the package name of the engine to use.
-        <p>
+        <h3 style="font-size: 20px">Curl</h3>
+        You can use curl to download the datasets and synthesizers using the steps below:
+        <ol>
+            <li> Go to the resource you want to download on the website</li>
+            <li> Copy the link address</li>
+            <li> Use curl as below:
+                <pre><code>  curl https://www.africanvoices.tech/static/app/datasets/ibb/ibb_lst.zip --output ibb_lst.zip </code></pre>
+            </li>
+        </ol>
+      Use curl to generate voice by following the below steps:
+    <ol>
+            <li> Go to the language synthesize</li>
+            <li> On the synthesis section, choose a synthesizer</li>
+            <li> Use curl as below:
+                <pre><code> curl -e https://www.africanvoices.tech/languages  -H "X-CSRFToken: 123" -b "csrftoken=123" -X  POST -F 'synth_id=kis_wak_30' -F 'text=Karibu sana' -F 'audio_format=mp3' https://www.africanvoices.tech/language/swa </code></pre>
+            </li>
+        </ol>
 
-        </p>
+
+
     </div>
 {% endblock %}

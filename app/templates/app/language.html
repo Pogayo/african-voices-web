@@ -8,7 +8,7 @@
         <div class="row" style="margin-top: 0px; display:grid; grid-template-columns: 0.7fr 0.3fr">
             <ul>
                 <li>ISO 693-2 Code: {{ language.lang_code_639_2 }}</li>
-                <li>Language family: Germanic</li>
+                <li>Language family: {{ language.lang_family }} </li>
                 <li> Number of speakers: {{ language.total_speakers }}</li>
                 <li>Countries : {{ language.all_countries }}</li>
 		<li><a href="{{ language.lang_wikipedia_url}}" target=_blank>Wikipedia link</a></li>

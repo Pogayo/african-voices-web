@@ -54,7 +54,6 @@ def language(request, lang_code_639_2):
 @csrf_exempt
 def synthesize(request):
     context = {}
-
     if request.method == 'POST':
         context['synth_id'] = request.POST.get('synth_id')
         context['text'] = request.POST.get("text")
