@@ -11,7 +11,7 @@
                 <li>Language family: {{ language.lang_family }} </li>
                 <li> Number of speakers: {{ language.total_speakers }}</li>
                 <li>Countries : {{ language.all_countries }}</li>
-		<li><a href="{{ language.lang_wikipedia_url}}" target=_blank>Wikipedia link</a></li>
+                <li><a href="{{ language.lang_wikipedia_url }}" target=_blank>Wikipedia link</a></li>
             </ul>
 
             <div class="side-nav" id="side-nav-div">
@@ -35,6 +35,7 @@
                         <th> Source</th>
                         <th> No. of sentences</th>
                         <th> MCD</th>
+                        <th> Quality</th>
                         <th> Hrs</th>
                         <th> Gender</th>
                         <th> Download</th>
@@ -45,12 +46,22 @@
                             <td>{{ dataset.source }}</td>
                             <td>{{ dataset.pass1_utt }}</td>
                             <td>{{ dataset.pass1_mcd|floatformat:2 }}</td>
+                            {% if dataset.pass1_mcd <= 6 %}
+                                <td> Good</td>
+                            {% elif dataset.pass1_mcd <= 7 %}
+                                <td> Okay</td>
+                            {% elif dataset.pass1_mcd <= 8 %}
+                                <td> Bad</td>
+                            {% else %}
+                                <td>}Something is wrong </a>
+                                </td>
+                            {% endif %}
                             <td>{{ dataset.duration|floatformat:2 }}</td>
                             <td> {{ dataset.speaker_gender }}</td>
                             {% if not dataset.data_location %}
                                 <td> Unavailable</td>
                             {% else %}
-                                <td><a href="{% static 'app/'  %}{{dataset.data_location }}">Download</a></td>
+                                <td><a href="{% static 'app/' %}{{ dataset.data_location }}">Download</a></td>
                             {% endif %}
                         </tr>
                     {% endfor %}
@@ -66,10 +77,11 @@
                     <tr>
                         <th> synth_id</th>
                         <th> data_id</th>
-                        <th> No. of sentences </th>
+                        <th> No. of sentences</th>
                         <th> Hrs</th>
                         <th> MCD base</th>
                         <th> MCD rfs</th>
+                        <th> Quality</th>
                         <th> Data</th>
                         <th> Flite</th>
 
@@ -79,23 +91,35 @@
                             <td>{{ synthesizer.synth_id }}</td>
                             <td>{{ synthesizer.dataset.data_id }}</td>
                             <td>{{ synthesizer.rfs_utt }}</td>
-                            <td>{{ synthesizer.rfs_hrs|floatformat:2}}</td>
+                            <td>{{ synthesizer.rfs_hrs|floatformat:2 }}</td>
                             <td>{{ synthesizer.mcd_base|floatformat:2 }}</td>
-                            <td>{{ synthesizer.mcd_rfs|floatformat:2}}</td>
+                            <td>{{ synthesizer.mcd_rfs|floatformat:2 }}</td>
+                            {% if synthesizer.mcd_rfs <= 5 %}
+                                <td> Good</td>
+                            {% elif synthesizer.mcd_rfs <= 6 %}
+                                <td> Okay</td>
+                            {% elif synthesizer.mcd_rfs <= 7 %}
+                                <td> Bad</td>
+                            {% else %}
+                                <td>}Something is wrong </td>
+                            {% endif %}
                             {% if not synthesizer.data_location %}
                                 <td> Unavailable</td>
                             {% else %}
-                                <td><a href="{% static 'app/'  %}{{synthesizer.data_location }}"> Download</a></td>
+                                <td><a href="{% static 'app/' %}{{ synthesizer.data_location }}"> Download</a></td>
                             {% endif %}
                             {% if not synthesizer.flite_location %}
                                 <td> Unavailable</td>
                             {% else %}
-                                <td><a href="{% static 'app/'  %}{{synthesizer.flite_location }}"> Download </a></td>
+                                <td><a href="{% static 'app/' %}{{ synthesizer.flite_location }}"> Download </a></td>
                             {% endif %}
                         </tr>
                     {% endfor %}
                 </table>
             </div>
+
+    <br>
+    <br>
 
 
             <h2 class="h2-primary"> Listen to samples </h2>
@@ -109,7 +133,7 @@
                     {% for  synth_sample in sample.synthesizer_samples %}
                         <p> {{ synth_sample.synth.synth_id }}</p>
                         <audio controls>
-                            <source src="{% static 'app/'  %}{{synth_sample.sample_location}}" type="audio/mpeg">
+                            <source src="{% static 'app/' %}{{ synth_sample.sample_location }}" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
                     {% endfor %}
@@ -117,16 +141,18 @@
                 </div>
             {% endfor %}
         </section>
-        <section id="sect-synthesize" style="width: 100%" >
+        <section id="sect-synthesize" style="width: 100%">
             <h2 class="h2-primary"> Synthesize your text!</h2>
 
             <div style="display:flex; flex-direction:column; justify-content: center; align-items: center; width: 100% ; margin-bottom: 25px">
                 <form action="{% url 'synthesize' %}" method="POST" id="synthRequestForm"
-                  name="synthRequestForm" style="max-width:700px">
-                {{ form.as_p }}
-                <button id="synth-btn" onclick="validateSubmit('wait_modal')" type="button" class="btn btn-primary mb-2" style="background-color: #FFAD00; border: none">Synthesize</button>
+                      name="synthRequestForm" style="max-width:700px">
+                    {{ form.as_p }}
+                    <button id="synth-btn" onclick="validateSubmit('wait_modal')" type="button"
+                            class="btn btn-primary mb-2" style="background-color: #FFAD00; border: none">Synthesize
+                    </button>
 
-            </form>
+                </form>
             </div>
 
 
