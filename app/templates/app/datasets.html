@@ -49,9 +49,9 @@
                             {% endif %}
                             <td>{{ dataset.source }}</td>
                             <td> {{ dataset.speaker_gender }}</td>
-                            <td>{{ dataset.pass1_utt }}</td>
-                            <td>{{ dataset.duration }}</td>
-                            <td>{{ dataset.pass1_mcd }}</td>
+                            <td>{{ dataset.pass1_utt}}</td>
+                            <td>{{ dataset.duration|floatformat:2}}</td>
+                            <td>{{ dataset.pass1_mcd|floatformat:2}}</td>
                             {% if not dataset.data_location %}
                                 <td> *Unavailable</td>
                             {% else %}

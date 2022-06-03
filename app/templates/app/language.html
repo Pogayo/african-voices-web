@@ -44,8 +44,8 @@
                             <td>{{ dataset.data_id }}</td>
                             <td>{{ dataset.source }}</td>
                             <td>{{ dataset.pass1_utt }}</td>
-                            <td>{{ dataset.pass1_mcd }}</td>
-                            <td>{{ dataset.duration }}</td>
+                            <td>{{ dataset.pass1_mcd|floatformat:2 }}</td>
+                            <td>{{ dataset.duration|floatformat:2 }}</td>
                             <td> {{ dataset.speaker_gender }}</td>
                             {% if not dataset.data_location %}
                                 <td> Unavailable</td>
@@ -79,9 +79,9 @@
                             <td>{{ synthesizer.synth_id }}</td>
                             <td>{{ synthesizer.dataset.data_id }}</td>
                             <td>{{ synthesizer.rfs_utt }}</td>
-                            <td>{{ synthesizer.rfs_hrs }}</td>
-                            <td>{{ synthesizer.mcd_base }}</td>
-                            <td>{{ synthesizer.mcd_rfs }}</td>
+                            <td>{{ synthesizer.rfs_hrs|floatformat:2}}</td>
+                            <td>{{ synthesizer.mcd_base|floatformat:2 }}</td>
+                            <td>{{ synthesizer.mcd_rfs|floatformat:2}}</td>
                             {% if not synthesizer.data_location %}
                                 <td> Unavailable</td>
                             {% else %}
