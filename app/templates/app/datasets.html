@@ -10,7 +10,7 @@
         <ul>
             <li>Create and record</li>
             <li> Align audio books from sources like <a href="https://open.bible/resources/"
-                                                        target="_blank">Open.Bible </a>,  <a
+                                                        target="_blank">Open.Bible </a>, <a
                     href="https://github.com/getalp/ALFFA_PUBLIC" target="_blank">ALLFA project</a>, <a
                     href="http://www.llsti.org/" target="_blank"> LLSTI </a></li>
             <li> Obtain single speaker audio-text pairs from sources like <a href="https://commonvoice.mozilla.org/"
@@ -25,13 +25,15 @@
                 <table class="table table-striped ">
                     <tr>
                         <th scope="col"> Data_id</th>
-                        <th scope="col"> Lang Code</th>
+                        <th scope="col"> Lang code</th>
                         <th scope="col"> Language</th>
                         <th scope="col"> Source</th>
                         <th scope="col"> Speaker</th>
-                        <th scope="col"> #utt</th>
+                        <th scope="col"> No. of sentences</th>
                         <th scope="col"> Hrs</th>
-                        <th scope="col"> MCD</th>
+                        <th scope="col"> MCD*</th>
+                        <th scope="col"> Quality</th>
+
                         {#                    <th> rfs #utt</th>#}
                         {#                    <th> rfs #mcd </th>#}
                         <th> Download</th>
@@ -44,18 +46,30 @@
                                 <td>{{ dataset.lang.lang_name }}  </td>
                             {% else %}
                                 <td>
-                                    <a href="{% url 'language' dataset.lang.lang_code_639_2 %}" target="_blank">{{ dataset.lang.lang_name }}</a>
+                                    <a href="{% url 'language' dataset.lang.lang_code_639_2 %}"
+                                       target="_blank">{{ dataset.lang.lang_name }}</a>
                                 </td>
                             {% endif %}
                             <td>{{ dataset.source }}</td>
                             <td> {{ dataset.speaker_gender }}</td>
-                            <td>{{ dataset.pass1_utt}}</td>
-                            <td>{{ dataset.duration|floatformat:2}}</td>
-                            <td>{{ dataset.pass1_mcd|floatformat:2}}</td>
-                            {% if not dataset.data_location %}
-                                <td> *Unavailable</td>
+                            <td>{{ dataset.pass1_utt }}</td>
+                            <td>{{ dataset.duration|floatformat:2 }}</td>
+                            <td>{{ dataset.pass1_mcd|floatformat:2 }}</td>
+                            {% if dataset.pass1_mcd <= 6 %}
+                                <td> Good</td>
+                            {% elif dataset.pass1_mcd <= 7 %}
+                                <td> Okay</td>
+                            {% elif dataset.pass1_mcd <= 8 %}
+                                <td> Bad</td>
                             {% else %}
-                                <td><a href="{% static 'app/'  %}{{dataset.data_location}}" download target=_blank>Available</a></td>
+                                <td>}Something is wrong </a>
+                                </td>
+                            {% endif %}
+                            {% if not dataset.data_location %}
+                                <td> **Unavailable</td>
+                            {% else %}
+                                <td><a href="{% static 'app/' %}{{ dataset.data_location }}" download target=_blank>Available</a>
+                                </td>
                             {% endif %}
                         </tr>
                     {% endfor %}
@@ -65,7 +79,20 @@
         </section>
 
     </div>
-    *Suba data is unavailable because the license doesn't allow us to redistribute. You can download it from the <a href="https://www.faithcomesbyhearing.com/audio-bible-resources/mp3-downloads" target=_blank >Faith Comes by Hearing </a> website for your personal use.
+
+    * "MCD is a distortion measure, comparing synthesized examples with originals. Smaller is better. For TTS, less than
+    5 is probably good, less than 6 is probably fine, greater than 6 is possibly bad (but still statistically useful),
+    greater than 7 probably indicates something is wrong. For alignment, MCDs seem to be about 1 larger than for TTS
+    (TTS only uses the best examples, and uses a much more complex prediction model)." <a href="http://festvox.org/cmu_wilderness/">Alan W Black</a>
+    <br>
+    For data from Open.Bible and Bible.is, the MCD reported is for alignment while for the rest the MCD reported is for TTS.
+
+    <br>
+    <br>
+
+    ** Suba data is unavailable because the license doesn't allow us to redistribute. You can download it from the
+    <a href="https://www.faithcomesbyhearing.com/audio-bible-resources/mp3-downloads" target=_blank>Faith Comes by
+        Hearing </a> website for your personal use.
     <br>
     <br>
 {% endblock %}
