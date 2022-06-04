@@ -1,0 +1,31 @@
+{% extends "app/base_generic.html" %}
+{% load static %}
+{% block title %}<title>Using on a smartphone</title>{% endblock %}
+{% block content %}
+    <div class="page-content">
+        {#     TODO: Recommend book reader, limit the amount of sentences to convert #}
+        <h1>How to use our synthesizers on a smartphone</h1>
+        {#     TODO:Add screenshots #}
+
+        <p> You might want to use the voices on your mobile applications, browser, or desktop. With <a
+                href="http://cmuflite.org/" target="_blank">Flite</a>, a
+            TTS engine
+            built at CMU, this is possible.</p>
+
+        <h2 class="h2-primary"> Android </h2>
+        <p> The first step is to install Flite TTS from Google Playstore</p>
+
+        After installing this application, you will have to:
+        <ul>
+            <li>
+                Enable Flite from "Text to Speech Settings" on your phone
+            </li>
+            <li>Install voice data</li>
+            <li>Go to "Language" settings and select the voice that you want.</li>
+            <li>By clicking on "Listen to a sample" you can verify that Flite is working.</li>
+        </ul>
+        <h2 class="h2-primary"> iOS</h2>
+        We do not have an iOS version of flite yet. It is coming soon.
+    </div>
+
+{% endblock %}

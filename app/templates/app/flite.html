@@ -1,29 +1,10 @@
 {% extends "app/base_generic.html" %}
 {% load static %}
-{% block title %}<title>How to use our synthesizers</title>{% endblock %}
+{% block title %}<title>For Developers</title>{% endblock %}
 {% block content %}
     <div class="page-content">
-        {#     TODO: Recommend book reader, limit the amount of sentences to convert #}
-        <h1>Flite</h1>
-        <p> You might want to use the voices on your mobile applications, browser, or desktop. With <a
-                href="http://cmuflite.org/" target="_blank">Flite</a>, a
-            TTS engine
-            built at CMU, this is possible.</p>
-
-        <h2 class="h2-primary"> Android </h2>
-        <p> The first step is to install Flite TTS from Google Playstore</p>
-
-        After installing this application, you will have to:
-        <ul>
-            <li>
-                Enable Flite from "Text to Speech Settings" on your phone
-            </li>
-            <li>Install voice data</li>
-            <li>Go to "Language" settings and select the voice that you want.</li>
-            <li>By clicking on "Listen to a sample" you can verify that Flite is working.</li>
-        </ul>
-        <h2 class="h2-primary"> iOS</h2>
-        We do not have an iOS version of flite yet. It is coming soon.
+        <h1>AfricanVoices for Developers</h1>
+        To download the data and use our TTS systems, follow the instructions below.
         <h2 class="h2-primary"> Desktop OS</h2>
         Flite works on Linux, Windows and Mac OS X. Follow the steps below to install it.
         <ol>
@@ -41,15 +22,13 @@
             </li>
         </ol>
 
-
-        <h2 class="h2-primary"> Flite for developers</h2>
         {#    TODO: Update this#}
-        <h3  style="font-size: 20px" >Android developers</h3>
+        <h2 class="h2-primary">Android Developers</h2>
         You can find the source code Flite TTS engine for Android on
         <a href="https://github.com/happyalu/Flite-TTS-Engine-for-Android" target="_blank">Github </a>
         If you are developing an application and would like to use Flite for speech synthesis, you can
         specify "edu.cmu.cs.speech.tts.flite" as the package name of the engine to use.
-        <h3 style="font-size: 20px">Curl</h3>
+        <h2 class="h2-primary"> Curl </h2>
         You can use curl to download the datasets and synthesizers using the steps below:
         <ol>
             <li> Go to the resource you want to download on the website</li>
@@ -58,15 +37,14 @@
                 <pre><code>  curl https://www.africanvoices.tech/static/app/datasets/ibb/ibb_lst.zip --output ibb_lst.zip </code></pre>
             </li>
         </ol>
-      Use curl to generate voice by following the below steps:
-    <ol>
+        Use curl to generate voice by following the below steps:
+        <ol>
             <li> Go to the language synthesize</li>
             <li> On the synthesis section, choose a synthesizer</li>
             <li> Use curl as below:
                 <pre><code> curl -e https://www.africanvoices.tech/languages  -H "X-CSRFToken: 123" -b "csrftoken=123" -X  POST -F 'synth_id=kis_wak_30' -F 'text=Karibu sana' -F 'audio_format=mp3' https://www.africanvoices.tech/language/swa </code></pre>
             </li>
         </ol>
-
 
 
     </div>

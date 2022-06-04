@@ -41,20 +41,46 @@ def execute_synthesis(context):
         proc.kill()
         outs, errs = proc.communicate()
 
-
+@csrf_exempt
 def language(request, lang_code_639_2):
     language = Language.objects.get(lang_code_639_2=lang_code_639_2)
     synthesizer_ids = [(synth.flite_location, synth.synth_id) for synth in language.synthesizer_set.all()]
     form = SynthesizeForm(synthesizer_ids)
-    print(form.as_p())
-    context = {'language': language, 'form': form , 'languages': Language.objects.all(), }
+    context = RequestContext(request)
+    context.push({'synth_id': c['synth_id'], 'text': c["text"], 'audio_format': c['audio_format']})
+
+    if request.method == 'POST':
+        c= {}
+        c['synth_id'] = request.POST.get('synth_id')
+        c['text'] = request.POST.get("text")
+        c['audio_format'] = request.POST.get("audio_format")
+
+        field_is_empty = is_empty(c['audio_format']) or is_empty(c['text']) or is_empty(c['synth_id'])
+
+        if field_is_empty:
+            return render(request, 'app/synthesize.html', {**context, "errors": "Fields are empty"})
+
+        SynthesizeRequestModel.objects.create(**c)
+
+        context['output_file'] = "app/static/app/synthesized/" + uuid4().hex
+        execute_synthesis(context)
+
+        context['output_file'] = context['output_file'][4:] + "." + context['audio_format']
+        # delete the file
+        new_thread = Thread(target=delete_audio, args=("app/" + context['output_file'],))
+        new_thread.start()
+
+    else:
+        print("GET here")
+
 
     return render(request, 'app/language.html', context)
 
 @csrf_exempt
 def synthesize(request):
-    context = {}
+    context = RequestContext
     if request.method == 'POST':
+        context['lang']==request.POST.get('lang')
         context['synth_id'] = request.POST.get('synth_id')
         context['text'] = request.POST.get("text")
         context['audio_format'] = request.POST.get("audio_format")
@@ -105,6 +131,10 @@ def languages(request):
 def contribute(request):
     context = {'languages': Language.objects.all(), }
     return render(request, 'app/contribute.html', context)
+
+def smartphone(request):
+    context = {'languages': Language.objects.all(), }
+    return render(request, 'app/smartphone.html', context)
 
 
 def is_empty(s):
