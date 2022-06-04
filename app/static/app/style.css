@@ -289,3 +289,9 @@ pre {
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+
+.synth-samples{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}

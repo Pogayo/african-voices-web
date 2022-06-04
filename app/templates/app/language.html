@@ -101,7 +101,7 @@
                             {% elif synthesizer.mcd_rfs <= 7 %}
                                 <td> Bad</td>
                             {% else %}
-                                <td>}Something is wrong </td>
+                                <td>}Something is wrong</td>
                             {% endif %}
                             {% if not synthesizer.data_location %}
                                 <td> Unavailable</td>
@@ -118,8 +118,8 @@
                 </table>
             </div>
 
-    <br>
-    <br>
+            <br>
+            <br>
 
 
             <h2 class="h2-primary"> Listen to samples </h2>
@@ -129,14 +129,21 @@
                 <div>
                     <p> Text: {{ sample.text }}</p>
                     <p> Pronunciation: {{ sample.pronunciation }}</p>
+                    <div class="synth-samples">
+                        {% for  synth_sample in sample.synthesizer_samples %}
 
-                    {% for  synth_sample in sample.synthesizer_samples %}
-                        <p> {{ synth_sample.synth.synth_id }}</p>
-                        <audio controls>
-                            <source src="{% static 'app/' %}{{ synth_sample.sample_location }}" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    {% endfor %}
+                            <div>
+                                <p> <em> {{ synth_sample.synth.synth_id }} </em></p>
+                                <audio controls>
+                                    <source src="{% static 'app/' %}{{ synth_sample.sample_location }}"
+                                            type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+
 
                 </div>
             {% endfor %}
@@ -146,7 +153,7 @@
 
             <div style="display:flex; flex-direction:column; justify-content: center; align-items: center; width: 100% ; margin-bottom: 25px">
                 <form action="{% url 'synthesize' %}" method="POST" id="synthRequestForm"
-                      name="synthRequestForm" style="max-width:700px">
+                      name="synthRequestForm" style="max-width:700px"> {% csrf_token %}
                     {{ form.as_p }}
                     <button id="synth-btn" onclick="validateSubmit('wait_modal')" type="button"
                             class="btn btn-primary mb-2" style="background-color: #FFAD00; border: none">Synthesize
@@ -156,14 +163,13 @@
             </div>
 
 
-            <div id="wait_modal">
-                <div id="wait_modal_content">
-                    <p>Please wait while we synthesize your text</p>
-                    <img src="{% static 'app/loader.gif' %}" alt="Loading...">
-                </div>
-
+            <div id="wait_modal"
+            <div id="wait_modal_content">
+                <p>Please wait while we synthesize your text</p>
+                <img src="{% static 'app/loader.gif' %}" alt="Loading...">
             </div>
-        </section>
+    </div>
+    </section>
 
 
     </div>
