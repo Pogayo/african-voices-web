@@ -103,7 +103,7 @@
                             {% else %}
                                 <td>}Something is wrong</td>
                             {% endif %}
-                            {% if not synthesizer.data_location  or  synthesizer.data_location == "na"%}
+                            {% if not synthesizer.data_location  or  synthesizer.data_location == "na" %}
                                 <td> Unavailable</td>
                             {% else %}
                                 <td><a href="{% static 'app/' %}{{ synthesizer.data_location }}"> Download</a></td>
@@ -133,7 +133,7 @@
                         {% for  synth_sample in sample.synthesizer_samples %}
 
                             <div>
-                                <p> <em> {{ synth_sample.synth.synth_id }} </em></p>
+                                <p><em> {{ synth_sample.synth.synth_id }} </em></p>
                                 <audio controls>
                                     <source src="{% static 'app/' %}{{ synth_sample.sample_location }}"
                                             type="audio/mpeg">
@@ -152,7 +152,7 @@
             <h2 class="h2-primary"> Synthesize your text!</h2>
 
             <div style="display:flex; flex-direction:column; justify-content: center; align-items: center; width: 100% ; margin-bottom: 25px">
-                <form action="{% url 'synthesize' %}" method="POST" id="synthRequestForm"
+                <form action="" method="POST" id="synthRequestForm"
                       name="synthRequestForm" style="max-width:700px"> {% csrf_token %}
                     {{ form.as_p }}
                     <button id="synth-btn" onclick="validateSubmit('wait_modal')" type="button"
@@ -162,16 +162,53 @@
                 </form>
             </div>
 
+            {% if output_file %}
+
+
+
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">There you go!</h5>
+                                <button id="cross-btn" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true" onclick="hide_modal('#exampleModalCenter')" style="padding: 5px">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div>
+                                    <p>Your text: {{ text }}</p>
+
+                                    <audio controls>
+                                        <source src="{% static '' %}{{ output_file }}" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="hide_modal('#exampleModalCenter')">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function () {
+                        $('#exampleModalCenter').modal('show')
+
+                    });
+                </script>
+
+            {% endif %}
 
             <div id="wait_modal">
-            <div id="wait_modal_content">
-                <p>Please wait while we synthesize your text</p>
-                <img src="{% static 'app/loader.gif' %}" alt="Loading...">
+                <div id="wait_modal_content">
+                    <p>Please wait while we synthesize your text</p>
+                    <img src="{% static 'app/loader.gif' %}" alt="Loading...">
+                </div>
             </div>
-    </div>
-    </section>
 
-
+        </section>
     </div>
 
 {% endblock %}

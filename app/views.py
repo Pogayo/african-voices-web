@@ -7,13 +7,17 @@ from uuid import uuid4
 
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+from django.template import RequestContext
 
 from .forms import SynthesizeForm, AddLanguageForm
 from .models import Language, SynthesizeRequestModel, Dataset, AddLanguage, Country, Synthesizer
 
 
 def delete_audio(audio_path):
-    sleep(10)
+    sleep(30)
     os.remove(audio_path)
 
 
@@ -46,41 +50,43 @@ def language(request, lang_code_639_2):
     language = Language.objects.get(lang_code_639_2=lang_code_639_2)
     synthesizer_ids = [(synth.flite_location, synth.synth_id) for synth in language.synthesizer_set.all()]
     form = SynthesizeForm(synthesizer_ids)
-    context = RequestContext(request)
-    context.push({'synth_id': c['synth_id'], 'text': c["text"], 'audio_format': c['audio_format']})
+    #context = {'language': language, 'form': form , 'languages': Language.objects.all(), }
+
+    # return render(request, 'app/language.html', context)
+    req_context = {}
+    req_context.update({'language': language, 'form': form , 'languages': Language.objects.all(), })
 
     if request.method == 'POST':
-        c= {}
-        c['synth_id'] = request.POST.get('synth_id')
-        c['text'] = request.POST.get("text")
-        c['audio_format'] = request.POST.get("audio_format")
+        context={}
+        context['synth_id'] = request.POST.get('synth_id')
+        context['text'] = request.POST.get("text")
+        context['audio_format'] = request.POST.get("audio_format")
 
-        field_is_empty = is_empty(c['audio_format']) or is_empty(c['text']) or is_empty(c['synth_id'])
+        field_is_empty = is_empty(context['audio_format']) or is_empty(context['text']) or is_empty(context['synth_id'])
 
         if field_is_empty:
             return render(request, 'app/synthesize.html', {**context, "errors": "Fields are empty"})
 
-        SynthesizeRequestModel.objects.create(**c)
-
-        context['output_file'] = "app/static/app/synthesized/" + uuid4().hex
+        SynthesizeRequestModel.objects.create(**context)
+        name = "app/synthesized/" + uuid4().hex
+        context['output_file'] = name
         execute_synthesis(context)
 
-        context['output_file'] = context['output_file'][4:] + "." + context['audio_format']
+        context['output_file'] = name + "." + context['audio_format']
         # delete the file
-        new_thread = Thread(target=delete_audio, args=("app/" + context['output_file'],))
+        new_thread = Thread(target=delete_audio, args=("public/static/" + context['output_file'],))
         new_thread.start()
 
-    else:
-        print("GET here")
+        req_context.update(context)
 
 
-    return render(request, 'app/language.html', context)
+    return render(request, 'app/language.html', req_context )
 
 @csrf_exempt
 def synthesize(request):
-    context = RequestContext
+    context = {}
+
     if request.method == 'POST':
-        context['lang']==request.POST.get('lang')
         context['synth_id'] = request.POST.get('synth_id')
         context['text'] = request.POST.get("text")
         context['audio_format'] = request.POST.get("audio_format")
