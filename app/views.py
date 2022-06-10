@@ -9,7 +9,7 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
 from .forms import SynthesizeForm, AddLanguageForm
-from .models import Language, SynthesizeRequestModel, Dataset ,AddLanguage
+from .models import Language, SynthesizeRequestModel, Dataset, AddLanguage, Country, Synthesizer
 
 
 def delete_audio(audio_path):
@@ -19,7 +19,7 @@ def delete_audio(audio_path):
 
 def index(request):
     context = {'languages': Language.objects.all(),
-               'num_synthesizers': 20, "num_countries": 20, "num_langs": 11, "num_speakers": 14, "num_hours": 120}
+               'num_synthesizers': len(Synthesizer.objects.all()), "num_countries":len(Country.objects.all()), "num_langs":len(Language.objects.all()), "num_speakers": 14, "num_hours": 120}
 
     return render(request, 'app/index.html', context)
 

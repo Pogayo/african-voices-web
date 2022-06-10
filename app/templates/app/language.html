@@ -103,7 +103,7 @@
                             {% else %}
                                 <td>}Something is wrong</td>
                             {% endif %}
-                            {% if not synthesizer.data_location %}
+                            {% if not synthesizer.data_location  or  synthesizer.data_location == "na"%}
                                 <td> Unavailable</td>
                             {% else %}
                                 <td><a href="{% static 'app/' %}{{ synthesizer.data_location }}"> Download</a></td>

@@ -28,24 +28,44 @@
         <a href="https://github.com/happyalu/Flite-TTS-Engine-for-Android" target="_blank">Github </a>
         If you are developing an application and would like to use Flite for speech synthesis, you can
         specify "edu.cmu.cs.speech.tts.flite" as the package name of the engine to use.
-        <h2 class="h2-primary"> Curl </h2>
-        You can use curl to download the datasets and synthesizers using the steps below:
+        <h2 class="h2-primary"> Curl/Python/Javascript</h2>
+        You can use curl/Python/Javascript to download the datasets and synthesizers using the steps below:
         <ol>
             <li> Go to the resource you want to download on the website</li>
             <li> Copy the link address</li>
             <li> Use curl as below:
                 <pre><code>  curl https://www.africanvoices.tech/static/app/datasets/ibb/ibb_lst.zip --output ibb_lst.zip </code></pre>
             </li>
+             <li> To use Python, you can use requests/urlib/wget libraries.
+                Look at details on how to use each of the <a>here</a> We provide a demo on using requests:
+                <pre>
+                    <code>
+                        import requests
+                        URL = "https://www.africanvoices.tech/static/app/datasets/ibb/ibb_lst.zip"
+                        response = requests.get(URL)
+                        open("ibb_lst.zip", "wb").write(response.content)
+                    </code>
+                </pre>
+                 The file will be stored in your working directory.
+            </li>
         </ol>
         Use curl to generate voice by following the below steps:
         <ol>
             <li> Go to the language synthesize</li>
             <li> On the synthesis section, choose a synthesizer</li>
-            <li> Use curl as below:
+            <li> To se curl as below:
                 <pre><code> curl -e https://www.africanvoices.tech/languages  -H "X-CSRFToken: 123" -b "csrftoken=123" -X  POST -F 'synth_id=kis_wak_30' -F 'text=Karibu sana' -F 'audio_format=mp3' https://www.africanvoices.tech/language/swa </code></pre>
             </li>
         </ol>
-
-
     </div>
 {% endblock %}
+
+
+import requests
+
+url = 'https://www.africanvoices.tech/language/luo'
+myobj = {'text': 'somevalue', 'format'='mp3', 'synth_id'='luo_ode_101'}
+
+x = requests.post(url, data = myobj)
+
+print(x.text)
