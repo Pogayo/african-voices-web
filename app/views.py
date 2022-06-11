@@ -9,6 +9,8 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
+
 
 from django.template import RequestContext
 
@@ -47,7 +49,7 @@ def execute_synthesis(context):
 
 @csrf_exempt
 def language(request, lang_code_639_2):
-    language = Language.objects.get(lang_code_639_2=lang_code_639_2)
+    language = get_object_or_404(Language,lang_code_639_2=lang_code_639_2)
     synthesizer_ids = [(synth.flite_location, synth.synth_id) for synth in language.synthesizer_set.all()]
     form = SynthesizeForm(synthesizer_ids)
     #context = {'language': language, 'form': form , 'languages': Language.objects.all(), }
@@ -145,3 +147,7 @@ def smartphone(request):
 
 def is_empty(s):
     return not s or not s.strip()
+
+
+def page_not_found_view(request, exception):
+    return render(request, '404.html', status=404)
