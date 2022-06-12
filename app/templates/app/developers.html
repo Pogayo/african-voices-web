@@ -36,7 +36,7 @@
             <li> Use curl as below:
                 <pre><code>  curl https://www.africanvoices.tech/static/app/datasets/ibb/ibb_lst.zip --output ibb_lst.zip </code></pre>
             </li>
-             <li> To use Python, you can use requests/urlib/wget libraries.
+            <li> To use Python, you can use requests/urlib/wget libraries.
                 Look at details on how to use each of the <a>here</a> We provide a demo on using requests:
                 <pre>
                     <code>
@@ -46,26 +46,32 @@
                         open("ibb_lst.zip", "wb").write(response.content)
                     </code>
                 </pre>
-                 The file will be stored in your working directory.
+                The file will be stored in your working directory.
             </li>
         </ol>
         Use curl to generate voice by following the below steps:
         <ol>
-            <li> Go to the language synthesize</li>
-            <li> On the synthesis section, choose a synthesizer</li>
-            <li> To se curl as below:
-                <pre><code> curl -e https://www.africanvoices.tech/languages  -H "X-CSRFToken: 123" -b "csrftoken=123" -X  POST -F 'synth_id=kis_wak_30' -F 'text=Karibu sana' -F 'audio_format=mp3' https://www.africanvoices.tech/language/swa </code></pre>
+            <li> Go to the page of the language you want to synthesize</li>
+            <li> On the synthesis section, choose a synthesizer and copy the id of the synthesizer:
+                                    <img src="{% static 'app/synth_id.png' %}" alt="check synth id" style="width: 150px;display: block; padding:10px">
             </li>
+            <li>Collect the following that you will use to replace the variables below:
+                 <pre><code>
+                text: the text you want to synthesize
+                url: the url of the language  eg https://www.africanvoices.tech/language/swa for Kiswahili
+                audio_format: either mp3 or wav
+                synth_id: id of the synthesize you obtained on the step above
+                 </code></pre>
+
+            </li>
+            <li> Use curl as below replacing the variables:
+                <pre><code> fname=$(curl -e -H  -X  POST -F 'synth_id=kis_wak_30' -F \
+                    'text={TEXT}' -F 'audio_format={AUDIO_FORMAT}' {URL} \
+                    | grep synth-audio \
+                    | sed -e 's/.*src="\(.*\){AUDIO_FORMAT}.*/\1/')
+curl https://www.africanvoices.tech"$fname"{AUDIO_FORMAT} --output out.{AUDIO_FORMAT}</code></pre>
+            </li>
+            Your file will be saved in out.{AUDIO_FORMAT}
         </ol>
     </div>
 {% endblock %}
-
-
-import requests
-
-url = 'https://www.africanvoices.tech/language/luo'
-myobj = {'text': 'somevalue', 'format'='mp3', 'synth_id'='luo_ode_101'}
-
-x = requests.post(url, data = myobj)
-
-print(x.text)

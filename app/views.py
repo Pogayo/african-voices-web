@@ -115,9 +115,9 @@ def synthesize(request):
     return render(request, 'app/synthesize.html', context)
 
 
-def flite(request):
+def developers(request):
     context = {'languages': Language.objects.all(), }
-    return render(request, 'app/flite.html', context)
+    return render(request, 'app/developers.html', context)
 
 @csrf_exempt
 def languages(request):
